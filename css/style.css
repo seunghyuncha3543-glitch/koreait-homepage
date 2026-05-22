@@ -31,6 +31,9 @@ img { max-width: 100%; }
 .section-title { font-size: clamp(1.6rem, 2.8vw, 2.2rem); line-height: 1.35; margin: 0 0 18px; }
 .section-lead { color: var(--color-mid); margin: 0 0 28px; }
 
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--color-border); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; min-height: 76px; }
+.site-logo img { width: 148px; height: auto; display: block; }
 .site-header {
   position: sticky; top: 0; z-index: 100;
   background: rgba(255,255,255,.96); backdrop-filter: blur(4px);
@@ -50,11 +53,50 @@ img { max-width: 100%; }
 .mobile-menu ul { list-style:none; margin:0; padding:12px 4%; }
 .mobile-menu a { display:block; padding:10px 0; color:var(--color-mid); }
 
+/*
+  [메인 배경사진 교체 방법]
+  첫 화면 배경사진을 바꾸고 싶으면
+  assets/images/hero-bg.jpg 파일을 원하는 사진으로 교체하면 됩니다.
+
+  권장 이미지:
+  - 파일명: hero-bg.jpg
+  - 가로 1920px 이상
+  - 저작권 문제가 없는 직접 촬영 사진 또는 라이선스 확인된 이미지
+  - 너무 화려한 사진보다 사무실, 서버, 네트워크, 도시, 업무 공간 느낌의 차분한 사진 권장
+
+  사진을 쓰지 않을 경우에도 아래 CSS 그라데이션과 패턴이 기본 배경으로 표시됩니다.
+*/
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 0 84px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.92)),
+    url("../assets/images/hero-bg.jpg"),
+    linear-gradient(135deg, #ffffff 0%, #f8f9fc 45%, #f5f7fb 100%);
+  background-size: cover, cover, cover;
+  background-position: center, center, center;
+  background-repeat: no-repeat;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(220,40,50,.06) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(15,75,155,.05) 1px, transparent 1px),
+    radial-gradient(circle at 12% 25%, rgba(15,75,155,.12), transparent 35%),
+    radial-gradient(circle at 85% 75%, rgba(220,40,50,.10), transparent 30%);
+  background-size: 36px 36px, 36px 36px, auto, auto;
+  pointer-events: none;
+}
+.hero .container { position: relative; z-index: 1; }
 .hero { padding: 96px 0 84px; }
 .hero-tag { color: var(--color-blue); font-weight: 700; letter-spacing: .08em; font-size: .92rem; }
 .hero h1 { font-size: clamp(2rem, 4.2vw, 3.2rem); line-height: 1.28; margin: 12px 0 14px; }
 .hero p { color: var(--color-mid); max-width: 700px; }
 .hero-actions { display:flex; gap:12px; margin-top: 30px; flex-wrap: wrap; }
+
 .btn { display:inline-block; border-radius: 8px; padding:12px 18px; font-weight:700; border:1px solid transparent; }
 .btn-primary { background: var(--color-blue); color:#fff; }
 .btn-secondary { border-color: var(--color-border); color: var(--color-dark); }
@@ -72,6 +114,19 @@ img { max-width: 100%; }
 .erp-step { border:1px solid var(--color-border); background:var(--color-bg-soft); padding:14px 12px; border-radius:10px; font-size:.92rem; text-align:center; }
 .erp-step.accent-red { border-color: rgba(220,40,50,.4); color: var(--color-red); }
 .erp-step.accent-blue { border-color: rgba(15,75,155,.35); color: var(--color-blue); }
+.check-list { display:grid; grid-template-columns: repeat(2,1fr); gap:10px; list-style:none; margin:20px 0 0; padding:0; }
+.check-list li { border:1px solid var(--color-border); padding:10px 12px; border-radius:8px; background:#fff; }
+.contact-list { display:grid; grid-template-columns: repeat(2,1fr); gap:10px 24px; }
+.contact-item strong { color: var(--color-mid); display:block; font-size:.88rem; }
+.notice-table { width:100%; border-collapse: collapse; margin-top: 18px; }
+.notice-table th, .notice-table td { border-bottom:1px solid var(--color-border); padding:12px 8px; text-align:left; }
+.notice-empty { padding:18px; background:var(--color-bg-soft); border:1px solid var(--color-border); border-radius:10px; margin-top:14px; color:var(--color-mid); }
+.site-footer { border-top:1px solid var(--color-border); padding:28px 0; margin-top: 40px; color:var(--color-mid); font-size:.93rem; }
+.footer-links { display:flex; gap:14px; flex-wrap:wrap; }
+.to-top { position: fixed; right: 18px; bottom: 18px; border:0; background: var(--color-dark); color:#fff; width:42px; height:42px; border-radius:50%; display:none; cursor:pointer; }
+.to-top.show { display:block; }
+@media (max-width: 960px) { .main-nav { display:none; } .menu-button { display:block; } .grid-3 { grid-template-columns: 1fr 1fr; } .erp-flow { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 640px) { .section { padding: 60px 0; } .grid-3, .timeline, .check-list, .contact-list, .erp-flow { grid-template-columns: 1fr; } }
 
 .check-list { display:grid; grid-template-columns: repeat(2,1fr); gap:10px; list-style:none; margin:20px 0 0; padding:0; }
 .check-list li { border:1px solid var(--color-border); padding:10px 12px; border-radius:8px; background:#fff; }
