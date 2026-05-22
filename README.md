@@ -1,91 +1,168 @@
-# KOREA IT 공식 홈페이지 운영 매뉴얼 (코딩 초보자용)
+# KOREA IT 공식 홈페이지 수정 가이드 (코딩 초보자용)
 
-## 1. 파일 구조 설명
+> 이 문서는 **코딩 경험이 거의 없는 사용자**가 직접 홈페이지를 관리할 수 있도록 만든 실무용 안내서입니다.
+
+## 1) 홈페이지 파일 구조 설명
+
+```text
+koreait-homepage/
+├─ index.html                # 한국어 메인 페이지
+├─ ja/
+│  └─ index.html             # 일본어 페이지
+├─ notice/
+│  ├─ index.html             # 공고 목록 페이지(자동 목록 렌더링)
+│  ├─ sample-notice.html     # 공고 상세 예시 페이지(복사용 템플릿)
+│  └─ notice-data.js         # 공고 목록 데이터 배열
+├─ css/
+│  └─ style.css              # 전체 디자인/레이아웃/배경 설정
+├─ js/
+│  └─ main.js                # 모바일 메뉴, 부드러운 스크롤, 맨 위 버튼
+├─ assets/
+│  ├─ logo-horizontal.svg
+│  ├─ logo-stacked.svg
+│  ├─ symbol.svg
+│  ├─ wordmark.svg
+│  ├─ favicon.svg
+│  ├─ images/
+│  │  └─ hero-bg.jpg         # (선택) 첫 화면 배경 사진
+│  └─ notices/
+│     └─ sample-notice.pdf   # 공고 첨부 PDF 예시
+└─ README.md
+```
+
+## 2) 메인 문구 수정 방법 (한국어)
+1. `index.html` 파일을 엽니다.
+2. 첫 화면 문구는 `hero` 섹션의 `h1`, `p`를 수정합니다.
+3. 회사소개/서비스/ERP/기술자산/일하는 기준/문의 섹션도 같은 방식으로 텍스트를 수정합니다.
+4. 저장 후 GitHub에 푸시하면 Pages 반영 후 확인할 수 있습니다.
+
+## 3) 서비스 항목 수정 방법
+1. `index.html`에서 `id="services"`를 찾습니다.
+2. `article class="card"` 블록이 6개 있으며 각 카드의 `h3`(제목), `p`(설명)을 바꾸면 됩니다.
+3. 카드 개수를 바꾸려면 같은 형식의 `article`을 복사/삭제하면 됩니다.
+
+## 4) 연락처 수정 방법
+1. `index.html`에서 `id="contact"`를 찾습니다.
+2. 회사명, 이메일, 전화, 모바일, 웹사이트, 주소를 실제 정보로 수정합니다.
+3. 전화 링크(`tel:`), 이메일 링크(`mailto:`)도 함께 수정하세요.
+
+## 5) 배경사진 바꾸는 방법
+1. 원하는 배경사진을 준비합니다.
+2. 파일명을 `hero-bg.jpg`로 변경합니다.
+3. `assets/images/` 폴더에 넣습니다.
+4. 기존 `hero-bg.jpg`가 있으면 교체합니다.
+5. 권장 크기는 가로 1920px 이상입니다.
+6. 저작권 문제가 없는 직접 촬영 사진 또는 라이선스 확인된 이미지만 사용하세요.
+
+> 참고: `hero-bg.jpg`가 없어도 홈페이지는 깨지지 않으며, CSS 기본 패턴 배경이 표시됩니다.
+
+## 6) 일본어 페이지 수정 방법
+1. `ja/index.html` 파일을 엽니다.
+2. 한국어 `index.html`과 섹션 구조가 같으므로 같은 위치의 일본어 문구를 수정하면 됩니다.
+3. 일본어 페이지 로고 경로는 `../assets/logo-horizontal.svg` 입니다.
+4. 일본어 페이지 이미지 경로는 한 단계 위로 올라가는 `../` 경로를 사용합니다.
+
+## 7) 공고 추가 방법 (가장 중요)
+1. `notice/sample-notice.html` 파일을 복사합니다.
+2. 파일명을 `날짜-영문제목.html` 형식으로 바꿉니다.
+   - 예: `2026-06-01-establishment.html`
+3. 복사한 HTML 파일 안에서 공고 제목, 게시일, 본문을 수정합니다.
+4. 첨부파일이 있으면 PDF 파일을 `assets/notices/` 폴더에 업로드합니다.
+5. `notice/notice-data.js` 파일을 엽니다.
+6. `notices` 배열에 새 공고 항목을 추가합니다.
+7. `title`, `date`, `url`, `attachment` 값을 수정합니다.
+8. 첨부파일이 없으면 `attachment: ""` 로 둡니다.
+
+예시:
+
+```js
+{
+  title: "제1기 결산공고",
+  date: "2026.12.31",
+  url: "2026-12-31-financial-statement.html",
+  attachment: "../assets/notices/2026-12-31-financial-statement.pdf"
+}
+```
+
+## 8) 공고 운영 시 주의사항
+- GitHub Pages에서는 웹 화면에서 직접 글쓰기와 파일 업로드를 할 수 없습니다.
+- 공고 추가는 **HTML 파일 + notice-data.js** 수정 방식입니다.
+- 공고 PDF는 `assets/notices/`에 직접 업로드해야 합니다.
+- 공고 삭제 전에는 법적 보관 필요성을 먼저 확인하세요.
+
+## 9) 이미지 교체 방법
+1. 일반 이미지는 `assets/images/`에 업로드합니다.
+2. 해당 이미지를 사용하는 HTML의 `src`를 새 파일명으로 바꿉니다.
+3. 일본어 페이지에서는 경로가 `../assets/images/...` 형태인지 확인하세요.
+
+## 10) 로고 교체 방법
+1. `assets/logo-horizontal.svg`, `assets/logo-stacked.svg`, `assets/symbol.svg` 파일을 공식 파일로 교체합니다.
+2. HTML에서 로고를 텍스트로 직접 만들지 않습니다.
+3. CSS는 `width`만 조정하고 `height: auto`를 유지합니다.
+
+## 11) 웹호스팅/깃허브 업로드 방법
+1. 수정한 파일을 저장합니다.
+2. Git에 커밋하고 원격 저장소에 푸시합니다.
+3. GitHub Pages 반영(보통 수십 초~수분) 후 사이트를 새로고침해서 확인합니다.
+
+## 12) 수정 전 백업 방법
+1. 전체 폴더를 복사해 `koreait-homepage-backup-날짜` 형태로 저장합니다.
+2. 중요한 수정 전에는 반드시 백업본을 남겨두세요.
+3. 문제 발생 시 백업본으로 즉시 복원할 수 있습니다.
+# KOREA IT 공식 홈페이지 수정 가이드 (초보자용)
+
+## 1) 파일 구조
 - `index.html`: 한국어 메인 페이지
-- `ja/index.html`: 일본어 메인 페이지
-- `notice/index.html`: 공고 목록 페이지
-- `notice/notice-data.js`: 공고 목록 데이터(제목/날짜/링크/첨부파일)
-- `notice/sample-notice.html`: 공고 상세 예시 템플릿
-- `css/style.css`: 색상, 배경, 반응형, 여백
-- `js/main.js`: 모바일 메뉴, 부드러운 스크롤, 맨 위 버튼
-- `assets/images/`: 배경 이미지/일반 이미지 저장
-- `assets/notices/`: 공고 첨부 PDF 저장
+- `ja/index.html`: 일본어 페이지
+- `notice/index.html`: 공고 목록
+- `notice/sample-notice.html`: 공고 상세 예시
+- `css/style.css`: 전체 디자인
+- `js/main.js`: 모바일 메뉴, 스크롤, 맨 위 버튼
+- `assets/`: 로고, 이미지, 공고 첨부 파일 보관
 
-## 2. 배경 이미지 교체 방법
-1. 배경 사진을 준비합니다.
-2. 파일명을 `hero-bg.jpg`로 맞춥니다.
-3. `assets/images/hero-bg.jpg` 위치에 업로드(또는 교체)합니다.
-4. 저장 후 페이지를 새로고침합니다.
-5. 권장: 가로 1920px 이상, 너무 어둡거나 화려하지 않은 사진.
-6. 저작권 문제가 없는 사진만 사용하세요.
-
-> 배경 사진이 없어도 깨지지 않게 CSS 기본 흰색 배경이 함께 설정되어 있습니다.
-
-## 3. 로고 교체 방법
-1. `assets/logo-horizontal.svg`, `assets/logo-stacked.svg`, `assets/symbol.svg`를 공식 파일로 교체합니다.
-2. HTML에 텍스트로 로고를 다시 쓰지 않습니다.
-3. 로고 크기는 `css/style.css`의 `.site-logo img`에서 `width`만 조정하고 `height: auto`를 유지합니다.
-
-## 4. 색상 수정 방법
-1. `css/style.css` 상단 `:root`를 찾습니다.
-2. `--color-red`, `--color-blue`, `--color-dark` 등 값을 수정합니다.
-3. 브랜드 일관성을 위해 Red/Blue는 포인트로만 사용하세요.
-
-## 5. 한국어 문구 수정 방법
+## 2) 메인 문구 수정 방법
 1. `index.html`을 엽니다.
-2. 수정할 섹션(Hero/회사소개/서비스/문의 등) 문구를 바꿉니다.
-3. 저장 후 브라우저에서 확인합니다.
+2. `hero` 섹션의 `h1`과 `p` 문구를 수정합니다.
+3. 저장 후 브라우저 새로고침으로 확인합니다.
 
-## 6. 일본어 페이지 수정 방법
-1. `ja/index.html`을 엽니다.
-2. 한국어 페이지와 같은 구조이므로 같은 위치 문구를 수정하면 됩니다.
-3. 일본어 페이지 로고 경로는 `../assets/logo-horizontal.svg`입니다.
-4. 일본어 페이지 이미지 경로는 `../assets/images/...` 형식입니다.
+## 3) 서비스 항목 수정 방법
+1. `index.html`에서 `id="services"`를 찾습니다.
+2. 각 `article.card`의 제목(`h3`)과 설명(`p`)을 수정합니다.
 
-## 7. 공고 추가 방법
-1. `notice/sample-notice.html`을 복사합니다.
-2. 파일명을 `2026-06-01-establishment.html` 같은 형식으로 바꿉니다.
-3. 복사본에서 제목/게시일/본문/첨부 링크를 수정합니다.
-4. PDF가 있으면 `assets/notices/`에 업로드합니다.
-5. `notice/notice-data.js`를 열고 `notices` 배열에 항목을 추가합니다.
-6. `title`, `date`, `url`, `attachment`를 입력합니다.
-7. 첨부파일이 없으면 `attachment: ""`로 둡니다.
+## 4) 연락처 수정 방법
+1. `index.html`에서 `id="contact"`를 찾습니다.
+2. 회사명, 이메일, 전화번호, 주소를 원하는 정보로 변경합니다.
 
-## 8. 첨부파일 PDF 추가 방법
-1. PDF 파일을 `assets/notices/`에 업로드합니다.
-2. 상세 페이지 HTML에 링크를 걸어줍니다.
-3. `notice-data.js`의 `attachment`에도 같은 경로를 넣어 목록에서 바로 접근 가능하게 합니다.
+## 5) 일본어 페이지 수정 방법
+1. `ja/index.html` 파일을 엽니다.
+2. 한국어 페이지와 동일한 위치의 일본어 문장을 수정합니다.
 
-## 9. 공고 관리자 기능의 한계와 대안
-### GitHub Pages에서 가능한 것
-- 정적 HTML/CSS/JS 파일 수정 후 배포
-- `notice-data.js` 기반 목록 관리
-- PDF 첨부 파일 링크 연결
+## 6) 공고 추가 방법
+1. `notice/sample-notice.html` 파일을 복사합니다.
+2. 파일명을 `날짜-영문제목.html`로 변경합니다. 예: `2026-06-01-establishment.html`
+3. 공고 제목, 게시일, 본문을 수정합니다.
+4. `notice/index.html`의 공고 목록에 새 링크를 추가합니다.
+5. PDF가 있으면 `assets/notices/`에 넣고 상세 페이지에 링크합니다.
 
-### GitHub Pages에서 불가능한 것(기본 상태)
-- 웹 화면에서 로그인 후 글 작성 저장
-- 웹 화면에서 서버 업로드 후 즉시 저장
-- DB 기반 관리자 게시판
+## 7) 이미지 교체 방법
+1. 교체할 이미지를 `assets/images/`에 업로드합니다.
+2. HTML 파일에서 이미지 경로를 새 파일명으로 바꿉니다.
 
-### 현실적인 대안
-1. **정적 방식 유지(현재 구현)**: 가장 단순하고 안정적.
-2. **Decap CMS + GitHub 저장소 연동**: GitHub OAuth/백엔드 설정이 필요하며, 설정 후 웹에서 콘텐츠 편집 가능.
-3. **별도 백엔드/호스팅 도입**: 관리자 업로드/DB 저장이 필요하면 서버가 있는 구조로 이전 필요.
+## 8) 로고 교체 방법
+1. `assets/logo-horizontal.svg`, `assets/logo-stacked.svg`, `assets/symbol.svg` 파일을 새 공식 파일로 교체합니다.
+2. HTML에서 로고를 텍스트로 다시 작성하지 않습니다.
+3. CSS에서는 `width`만 조정하고 `height: auto`를 유지합니다.
 
-> 중요: 실제 저장이 안 되는 “가짜 글쓰기 폼”은 만들지 않는 것이 맞습니다.
+## 9) 웹호스팅 업로드 방법
+1. 모든 파일을 폴더 구조 그대로 압축합니다.
+2. 호스팅 파일 관리자 또는 FTP로 업로드합니다.
+3. `index.html`이 루트에 있는지 확인합니다.
 
-## 10. GitHub Pages 배포 확인 방법
-1. GitHub 저장소에 커밋/푸시합니다.
-2. 저장소 Settings → Pages에서 배포 브랜치를 확인합니다.
-3. 배포 URL 접속 후 메뉴/배경/공고 링크를 확인합니다.
+## 10) 수정 전 백업 방법
+1. 전체 폴더를 복사해 `koreait-homepage-backup-날짜`로 저장합니다.
+2. 수정 후 문제가 생기면 백업본으로 복원합니다.
 
-## 11. merge conflict 발생 시 주의사항
-1. `<<<<<<<`, `=======`, `>>>>>>>` 표시를 기준으로 충돌 구간을 찾습니다.
-2. 최신 main 내용을 우선 확인합니다.
-3. 필요한 변경만 골라 반영하고 충돌 표시를 삭제합니다.
-4. 저장 후 다시 충돌 마커가 없는지 검색합니다.
+---
 
-## 12. 수정 전 백업 방법
-1. 전체 폴더를 복사해 날짜를 붙여 백업합니다.
-2. 큰 수정 전에는 브랜치를 새로 만들어 작업합니다.
-3. 문제가 생기면 백업본 또는 이전 커밋으로 복구합니다.
+## 공식 로고 자산 안내
+현재 저장소에는 임시 자리 파일명이 들어가 있습니다. 실제 배포 전 반드시 제공받은 `koreait_brand_assets_extracted.zip`의 공식 로고 파일로 `assets/` 내부 파일을 교체해 주세요.
