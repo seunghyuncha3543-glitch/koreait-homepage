@@ -1,0 +1,118 @@
+/*
+  [파일 역할]
+  이 파일은 전체 디자인을 담당합니다.
+  [수정 가능]: 색상, 글자 크기, 여백, 배경 관련 값
+  [주의]: 경로(url), 반응형 기준값, 구조와 직접 연결된 선택자 이름
+*/
+
+/*
+  [브랜드 컬러 변수]
+  아래 값은 홈페이지 전체 색상 기준입니다.
+  숫자(HEX 코드)를 바꾸면 사이트 전체 톤이 같이 바뀝니다.
+*/
+:root {
+  --color-red: #DC2832;   /* Taegeuk Red: 강조 버튼/강조선 */
+  --color-blue: #0F4B9B;  /* Taegeuk Blue: 링크/포인트 */
+  --color-dark: #1E1E23;  /* 본문 핵심 텍스트 */
+  --color-mid: #5A5A5F;   /* 보조 텍스트 */
+  --color-light: #8C8C91; /* 약한 안내 텍스트 */
+  --color-bg: #FFFFFF;    /* 기본 배경 흰색 */
+  --color-bg-soft: #F6F7F9; /* 카드/구분 배경 */
+  --color-border: #E5E7EB; /* 경계선 */
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/*
+  [배경사진 교체 방법]
+  assets/images/hero-bg.jpg 파일을 교체하면 홈페이지 배경이 바뀝니다.
+  직접 촬영한 사진 또는 저작권 문제가 없는 이미지만 사용하세요.
+
+  이 배경은 body 전체에 아주 옅게 적용됩니다.
+  이미지가 없으면 마지막 흰색 그라데이션이 표시되어 화면이 깨지지 않습니다.
+*/
+body {
+  margin: 0;
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  color: var(--color-dark);
+  line-height: 1.7;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.96)),
+    url("../assets/images/hero-bg.jpg"),
+    linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%);
+  background-size: cover, cover, cover;
+  background-position: center, center, center;
+  background-attachment: fixed;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+.container { width: min(1120px, 92%); margin: 0 auto; }
+.section { padding: 80px 0; border-top: 1px solid var(--color-border); }
+.section-title { font-size: clamp(1.6rem, 2.8vw, 2.2rem); line-height: 1.35; margin: 0 0 18px; }
+.section-lead { color: var(--color-mid); margin: 0 0 28px; }
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--color-border); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; min-height: 76px; }
+.site-logo img { width: 148px; height: auto; display: block; }
+.main-nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; align-items: center; }
+.main-nav a { color: var(--color-mid); font-weight: 500; }
+.main-nav a:hover { color: var(--color-dark); }
+.nav-notice { color: var(--color-blue) !important; }
+.menu-button { display:none; border:1px solid var(--color-border); background:#fff; padding:8px 10px; border-radius:8px; }
+.mobile-menu { display:none; border-top:1px solid var(--color-border); background:#fff; }
+.mobile-menu.active { display:block; }
+.mobile-menu ul { list-style:none; margin:0; padding:12px 4%; }
+.mobile-menu a { display:block; padding:10px 0; color:var(--color-mid); }
+
+/* Hero는 body보다 조금 더 선명한 백색 오버레이로 가독성 확보 */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 0 84px;
+  background: linear-gradient(rgba(255,255,255,.90), rgba(255,255,255,.92));
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(220,40,50,.04) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(15,75,155,.04) 1px, transparent 1px),
+    radial-gradient(circle at 12% 25%, rgba(15,75,155,.08), transparent 35%),
+    radial-gradient(circle at 85% 75%, rgba(220,40,50,.07), transparent 30%);
+  background-size: 40px 40px, 40px 40px, auto, auto;
+  pointer-events: none;
+}
+.hero .container { position: relative; z-index: 1; }
+.hero-tag { color: var(--color-blue); font-weight: 700; letter-spacing: .08em; font-size: .92rem; }
+.hero h1 { font-size: clamp(2rem, 4.2vw, 3.2rem); line-height: 1.28; margin: 12px 0 14px; }
+.hero p { color: var(--color-mid); max-width: 700px; }
+.hero-actions { display:flex; gap:12px; margin-top: 30px; flex-wrap: wrap; }
+.btn { display:inline-block; border-radius: 8px; padding:12px 18px; font-weight:700; border:1px solid transparent; }
+.btn-primary { background: var(--color-blue); color:#fff; }
+.btn-secondary { border-color: var(--color-border); color: var(--color-dark); }
+.timeline { display:grid; grid-template-columns: repeat(4,1fr); gap:12px; margin-top:24px; }
+.timeline div { background: rgba(246,247,249,.9); border:1px solid var(--color-border); border-radius:10px; padding:14px; }
+.timeline strong { color: var(--color-blue); display:block; }
+.grid-3 { display:grid; grid-template-columns: repeat(3,1fr); gap:16px; }
+.card { border:1px solid var(--color-border); border-radius: 12px; padding:20px; background: rgba(255,255,255,.96); }
+.card h3 { margin:0 0 8px; font-size:1.05rem; }
+.card p { margin:0; color: var(--color-mid); }
+.erp-flow { display:grid; grid-template-columns: repeat(6,1fr); gap:10px; margin-top:22px; }
+.erp-step { border:1px solid var(--color-border); background:rgba(246,247,249,.9); padding:14px 12px; border-radius:10px; font-size:.92rem; text-align:center; }
+.erp-step.accent-red { border-color: rgba(220,40,50,.4); color: var(--color-red); }
+.erp-step.accent-blue { border-color: rgba(15,75,155,.35); color: var(--color-blue); }
+.check-list { display:grid; grid-template-columns: repeat(2,1fr); gap:10px; list-style:none; margin:20px 0 0; padding:0; }
+.check-list li { border:1px solid var(--color-border); padding:10px 12px; border-radius:8px; background:rgba(255,255,255,.96); }
+.contact-list { display:grid; grid-template-columns: repeat(2,1fr); gap:10px 24px; }
+.contact-item strong { color: var(--color-mid); display:block; font-size:.88rem; }
+.notice-table { width:100%; border-collapse: collapse; margin-top: 18px; background: rgba(255,255,255,.96); }
+.notice-table th, .notice-table td { border-bottom:1px solid var(--color-border); padding:12px 8px; text-align:left; }
+.notice-empty { padding:18px; background:rgba(246,247,249,.9); border:1px solid var(--color-border); border-radius:10px; margin-top:14px; color:var(--color-mid); }
+.site-footer { border-top:1px solid var(--color-border); padding:28px 0; margin-top: 40px; color:var(--color-mid); font-size:.93rem; background: rgba(255,255,255,.94); }
+.footer-links { display:flex; gap:14px; flex-wrap:wrap; }
+.to-top { position: fixed; right: 18px; bottom: 18px; border:0; background: var(--color-dark); color:#fff; width:42px; height:42px; border-radius:50%; display:none; cursor:pointer; }
+.to-top.show { display:block; }
+@media (max-width: 960px) { .main-nav { display:none; } .menu-button { display:block; } .grid-3 { grid-template-columns: 1fr 1fr; } .erp-flow { grid-template-columns: repeat(3,1fr); } body { background-attachment: scroll; } }
+@media (max-width: 640px) { .section { padding: 60px 0; } .grid-3, .timeline, .check-list, .contact-list, .erp-flow { grid-template-columns: 1fr; } }
