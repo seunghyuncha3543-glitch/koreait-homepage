@@ -1,0 +1,255 @@
+/*
+  [파일 역할]
+  이 파일은 홈페이지 전체 디자인(색상/배경/레이아웃/반응형)을 담당합니다.
+  초보자 기준으로 01~10 구역으로 나누어 두었습니다.
+*/
+
+/* =================================================================== */
+/* 01) 브랜드 색상 변수: 전체 페이지 공통 색상 기준 */
+/* 적용 화면: 모든 페이지(index/ja/notice) */
+/* =================================================================== */
+:root {
+  --color-red: #DC2832;      /* [포인트 빨강] 강조선/강조 텍스트 */
+  --color-blue: #0F4B9B;     /* [포인트 파랑] 버튼/링크/강조 */
+  --color-dark: #1E1E23;     /* [진한 글자색] 제목/본문 핵심 텍스트 */
+  --color-mid: #5A5A5F;      /* [중간 글자색] 설명 문구 */
+  --color-light: #8C8C91;    /* [약한 글자색] 보조 안내 문구 */
+  --color-bg: #FFFFFF;       /* [기본 배경] 전체 바탕 흰색 */
+  --color-bg-soft: #F6F7F9;  /* [연한 배경] 카드/구분 영역 */
+  --color-border: #E5E7EB;   /* [경계선] 테두리/구분선 */
+}
+
+/* =================================================================== */
+/* 02) 기본 리셋/공통 글꼴/전체 배경 */
+/* 적용 화면: 모든 페이지의 기본 바탕 */
+/* =================================================================== */
+* { box-sizing: border-box; } /* [박스 계산 방식] padding/border 포함해서 크기 계산 */
+html { scroll-behavior: smooth; } /* [부드러운 이동] #앵커 클릭 시 스크롤 애니메이션 */
+
+body {
+  margin: 0; /* [기본 여백 제거] 브라우저 기본 바깥 여백 제거 */
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; /* [글꼴 우선순위] */
+  color: var(--color-dark); /* [기본 글자색] 진한 회색 */
+  line-height: 1.7; /* [줄 간격] 본문 가독성 확보 */
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.96)), /* [옅은 흰 오버레이] 글자 가독성 확보 */
+    url("../assets/images/hero-bg.jpg"), /* [배경 이미지] 파일 교체 시 전체 배경 변경 */
+    linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%); /* [대체 배경] 이미지 없을 때도 자연스럽게 표시 */
+  background-size: cover, cover, cover; /* [배경 크기] 화면을 가득 채움 */
+  background-position: center, center, center; /* [배경 기준점] 중앙 정렬 */
+  background-attachment: fixed; /* [배경 고정] 스크롤 시 은은한 고정 느낌 */
+}
+
+a { color: inherit; text-decoration: none; } /* [링크 기본 스타일] 밑줄 제거, 부모 글자색 상속 */
+img { max-width: 100%; } /* [이미지 넘침 방지] 부모 폭보다 커지지 않게 제한 */
+.container { width: min(1120px, 92%); margin: 0 auto; } /* [콘텐츠 폭] 최대 1120px, 작은 화면은 92% */
+
+/* =================================================================== */
+/* 03) 공통 섹션/제목/설명 스타일 */
+/* 적용 화면: about/services/erp/assets/contact 및 notice 본문 */
+/* =================================================================== */
+.section {
+  padding: 80px 0; /* [위아래 여백] 섹션 간 숨 쉴 공간 */
+  border-top: 1px solid var(--color-border); /* [구분선] 섹션 시작 경계 */
+}
+.section-title {
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem); /* [제목 크기] 화면 크기에 맞춰 자동 조절 */
+  line-height: 1.35; /* [제목 줄간격] 두 줄 제목 가독성 개선 */
+  margin: 0 0 18px; /* [제목 아래 간격] 설명문과 거리 확보 */
+}
+.section-lead {
+  color: var(--color-mid); /* [설명 문구 색] 제목보다 약하게 */
+  margin: 0 0 28px; /* [설명 아래 간격] 다음 요소와 거리 */
+}
+
+/* =================================================================== */
+/* 04) 상단 헤더/네비게이션 */
+/* 적용 화면: 모든 페이지 상단 고정 메뉴 */
+/* =================================================================== */
+.site-header {
+  position: sticky; /* [상단 고정] 스크롤해도 헤더가 상단에 붙어 있음 */
+  top: 0; /* [고정 위치] 화면 맨 위 */
+  z-index: 100; /* [겹침 우선순위] 본문보다 위에 표시 */
+  background: rgba(255, 255, 255, 0.96); /* [반투명 배경] 내용은 보이고 글자는 선명 */
+  border-bottom: 1px solid var(--color-border); /* [하단 선] 헤더 구분선 */
+}
+.header-inner {
+  display: flex; /* [가로 배치] 로고와 메뉴를 한 줄에 배치 */
+  align-items: center; /* [세로 정렬] 중앙 맞춤 */
+  justify-content: space-between; /* [좌우 분리] 로고 왼쪽, 메뉴 오른쪽 */
+  min-height: 76px; /* [헤더 높이] 터치/가독성 확보 */
+}
+.site-logo img {
+  width: 148px; /* [로고 폭] 브랜드 권장 크기 */
+  height: auto; /* [비율 유지] 로고 찌그러짐 방지 */
+  display: block; /* [여백 버그 방지] inline 이미지 하단 공백 제거 */
+}
+.main-nav ul {
+  display: flex; /* [메뉴 가로 정렬] */
+  gap: 22px; /* [메뉴 간격] 항목 사이 거리 */
+  list-style: none; /* [불릿 제거] */
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+.main-nav a { color: var(--color-mid); font-weight: 500; } /* [기본 메뉴색] */
+.main-nav a:hover { color: var(--color-dark); } /* [호버색] */
+.nav-notice { color: var(--color-blue) !important; } /* [공고 강조] */
+
+.menu-button {
+  display: none; /* [초기 숨김] 모바일에서만 표시 */
+  border: 1px solid var(--color-border);
+  background: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+.mobile-menu {
+  display: none; /* [초기 숨김] 버튼 클릭 시 JS로 열림 */
+  border-top: 1px solid var(--color-border);
+  background: #fff;
+}
+.mobile-menu.active { display: block; } /* [열림 상태] JS가 active를 붙이면 보임 */
+.mobile-menu ul { list-style: none; margin: 0; padding: 12px 4%; }
+.mobile-menu a { display: block; padding: 10px 0; color: var(--color-mid); }
+
+/* =================================================================== */
+/* 05) Hero(첫 화면) 영역 */
+/* 적용 화면: 메인/일본어 첫 화면 배너 */
+/* =================================================================== */
+.hero {
+  position: relative; /* [가상요소 기준] ::before 패턴 배치를 위한 기준 */
+  overflow: hidden; /* [넘침 숨김] 장식 패턴이 밖으로 튀지 않게 */
+  padding: 96px 0 84px; /* [세로 여백] 첫 화면 높이감 */
+  background: linear-gradient(rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.92)); /* [추가 강조] body 배경 위에 더 밝은 오버레이 */
+}
+.hero::before {
+  content: ""; /* [가상 장식 레이어 생성] */
+  position: absolute;
+  inset: 0; /* [전체 덮기] hero 전체 범위 */
+  background-image:
+    linear-gradient(90deg, rgba(220, 40, 50, .04) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(15, 75, 155, .04) 1px, transparent 1px),
+    radial-gradient(circle at 12% 25%, rgba(15, 75, 155, .08), transparent 35%),
+    radial-gradient(circle at 85% 75%, rgba(220, 40, 50, .07), transparent 30%);
+  background-size: 40px 40px, 40px 40px, auto, auto; /* [격자 크기] 너무 튀지 않게 넓게 설정 */
+  pointer-events: none; /* [클릭 방해 금지] 장식 레이어가 버튼 클릭 막지 않게 */
+}
+.hero .container { position: relative; z-index: 1; } /* [본문 우선] 장식 위에 텍스트 표시 */
+.hero-tag { color: var(--color-blue); font-weight: 700; letter-spacing: .08em; font-size: .92rem; }
+.hero h1 { font-size: clamp(2rem, 4.2vw, 3.2rem); line-height: 1.28; margin: 12px 0 14px; }
+.hero p { color: var(--color-mid); max-width: 700px; }
+.hero-actions { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+
+/* =================================================================== */
+/* 06) 버튼/카드/타임라인/ERP 흐름 */
+/* 적용 화면: 서비스 카드, 연혁 박스, ERP 단계 박스 */
+/* =================================================================== */
+.btn { display: inline-block; border-radius: 8px; padding: 12px 18px; font-weight: 700; border: 1px solid transparent; }
+.btn-primary { background: var(--color-blue); color: #fff; }
+.btn-secondary { border-color: var(--color-border); color: var(--color-dark); }
+
+.timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
+.timeline div { background: rgba(246, 247, 249, .9); border: 1px solid var(--color-border); border-radius: 10px; padding: 14px; }
+.timeline strong { color: var(--color-blue); display: block; }
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.card {
+  border: 1px solid var(--color-border); /* [카드 테두리] 섹션 구분 */
+  border-radius: 12px; /* [둥근 모서리] 부드러운 느낌 */
+  padding: 20px; /* [카드 안쪽 여백] 텍스트 숨 쉴 공간 */
+  background: rgba(255, 255, 255, .96); /* [옅은 흰색 배경] 본문 가독성 유지 */
+}
+.card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+.card p { margin: 0; color: var(--color-mid); }
+
+.erp-flow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 22px; }
+.erp-step { border: 1px solid var(--color-border); background: rgba(246, 247, 249, .9); padding: 14px 12px; border-radius: 10px; font-size: .92rem; text-align: center; }
+.erp-step.accent-red { border-color: rgba(220, 40, 50, .4); color: var(--color-red); }
+.erp-step.accent-blue { border-color: rgba(15, 75, 155, .35); color: var(--color-blue); }
+
+/* =================================================================== */
+/* 07) 체크리스트/문의/푸터 */
+/* 적용 화면: 일하는 기준, 문의 연락처, 하단 영역 */
+/* =================================================================== */
+.check-list {
+  display: grid; /* [그리드 배치] 항목 정렬 */
+  grid-template-columns: repeat(2, 1fr); /* [2열] 데스크톱에서 2칸 */
+  gap: 10px;
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+}
+.check-list li { border: 1px solid var(--color-border); padding: 10px 12px; border-radius: 8px; background: rgba(255, 255, 255, .96); }
+
+.contact-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 24px; }
+.contact-item strong { color: var(--color-mid); display: block; font-size: .88rem; }
+
+.site-footer { border-top: 1px solid var(--color-border); padding: 28px 0; margin-top: 40px; color: var(--color-mid); font-size: .93rem; background: rgba(255, 255, 255, .94); }
+.footer-links { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* =================================================================== */
+/* 08) 공고 페이지 전용 테이블 */
+/* 적용 화면: /notice/index.html 목록 표 */
+/* =================================================================== */
+.notice-table {
+  width: 100%; /* [가로 꽉 채움] 부모 영역에 맞춤 */
+  border-collapse: collapse; /* [표 선 겹침 제거] 깔끔한 선 처리 */
+  margin-top: 18px; /* [위쪽 간격] 설명문 아래 여백 */
+  background: rgba(255, 255, 255, .96); /* [가독성] 배경 위에서도 표가 또렷 */
+}
+.notice-table th,
+.notice-table td {
+  border-bottom: 1px solid var(--color-border); /* [행 구분선] 각 줄 구분 */
+  padding: 12px 8px; /* [셀 내부 여백] 읽기 쉬운 간격 */
+  text-align: left; /* [좌측 정렬] 한국어/일본어 텍스트 가독성 */
+}
+.notice-empty {
+  padding: 18px;
+  background: rgba(246, 247, 249, .9);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  margin-top: 14px;
+  color: var(--color-mid);
+}
+
+/* =================================================================== */
+/* 09) 맨 위 이동 버튼 */
+/* 적용 화면: 스크롤 시 우하단 원형 버튼 */
+/* =================================================================== */
+.to-top {
+  position: fixed; /* [고정 위치] 화면 기준 배치 */
+  right: 18px; /* [오른쪽 거리] */
+  bottom: 18px; /* [아래 거리] */
+  border: 0;
+  background: var(--color-dark);
+  color: #fff;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: none; /* [초기 숨김] 스크롤 조건 충족 시 JS가 show 추가 */
+  cursor: pointer;
+}
+.to-top.show { display: block; } /* [표시 상태] */
+
+/* =================================================================== */
+/* 10) 반응형 미디어쿼리 */
+/* 적용 화면: 태블릿/모바일에서 레이아웃 자동 조정 */
+/* =================================================================== */
+@media (max-width: 960px) {
+  .main-nav { display: none; } /* [태블릿] PC 메뉴 숨기고 모바일 버튼 사용 */
+  .menu-button { display: block; } /* [태블릿] 메뉴 버튼 표시 */
+  .grid-3 { grid-template-columns: 1fr 1fr; } /* [카드 2열] */
+  .erp-flow { grid-template-columns: repeat(3, 1fr); } /* [ERP 3열] */
+  body { background-attachment: scroll; } /* [모바일 성능] fixed 대신 scroll */
+}
+
+@media (max-width: 640px) {
+  .section { padding: 60px 0; } /* [모바일] 섹션 여백 축소 */
+  .grid-3,
+  .timeline,
+  .check-list,
+  .contact-list,
+  .erp-flow {
+    grid-template-columns: 1fr; /* [모바일 1열] 세로 정렬 */
+  }
+}
