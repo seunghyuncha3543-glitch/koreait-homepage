@@ -1,154 +1,28 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <!--
-    [기본 문서 정보]
-    - charset: 한글 깨짐 방지
-    - viewport: 모바일 화면 크기에 맞춰 반응형 표시
-  -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!--
-    [검색엔진/공유용 정보]
-    아래 문구를 바꾸면 검색 결과 제목/설명, 카카오톡/메신저 공유 문구가 바뀝니다.
-  -->
   <title>KOREA IT | 구축 이후까지 함께 운영하는 IT Total Solution</title>
   <meta name="description" content="KOREA IT는 1997년부터 이어온 현장 경험을 바탕으로 기업 IT 운영, ERP, 데이터 자동화, 보안 관리를 함께 제공합니다.">
   <meta property="og:title" content="KOREA IT | IT Total Solution">
   <meta property="og:description" content="구축 이후까지 함께 운영하는 IT Total Solution 파트너">
   <meta property="og:image" content="assets/og-image.jpg">
-
-  <!--
-    [파비콘]
-    브라우저 탭 아이콘입니다. 파일을 바꾸면 탭 아이콘도 바뀝니다.
-  -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-
-  <!--
-    [공통 스타일 파일]
-    홈페이지의 색상/여백/글자 크기/배경을 제어합니다.
-  -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<!--
-  [파일 역할]
-  이 파일은 초보자도 수정할 수 있도록 설명형 주석을 많이 포함한 HTML입니다.
-  [수정 가능] 표시가 있는 문구는 바꿔도 안전합니다.
-  [주의] 표시는 구조/경로와 관련되어 있어 신중히 수정해야 합니다.
--->
-
-  <!-- [상단 헤더] 로고 + 메뉴 영역 -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <!-- 로고 파일 교체 시 assets/logo-horizontal.svg를 교체하세요. -->
-      <a class="site-logo" href="index.html"><img src="assets/logo-horizontal.svg" alt="KOREA IT"></a>
-
-      <!--
-        [PC 메뉴]
-        메뉴 순서:
-        회사소개 / 서비스 / 운영 가능한 ERP / 기술자산 / 공고 / 日本語 / 문의
-      -->
-      <nav class="main-nav" aria-label="주요 메뉴">
-        <ul>
-          <li><a href="#about">회사소개</a></li>
-          <li><a href="#services">서비스</a></li>
-          <li><a href="#erp">운영 가능한 ERP</a></li>
-          <li><a href="#assets">기술자산</a></li>
-          <li><a class="nav-notice" href="notice/index.html">공고</a></li>
-          <li><a href="ja/index.html">日本語</a></li>
-          <li><a href="#contact">문의</a></li>
-        </ul>
-      </nav>
-
-      <!-- 모바일 메뉴 열기 버튼 -->
-      <button class="menu-button" aria-expanded="false" aria-controls="mobile-menu">메뉴</button>
-    </div>
-
-    <!-- 모바일 메뉴 -->
-    <div id="mobile-menu" class="mobile-menu">
-      <ul>
-        <li><a href="#about">회사소개</a></li>
-        <li><a href="#services">서비스</a></li>
-        <li><a href="#erp">운영 가능한 ERP</a></li>
-        <li><a href="#assets">기술자산</a></li>
-        <li><a href="notice/index.html">공고</a></li>
-        <li><a href="ja/index.html">日本語</a></li>
-        <li><a href="#contact">문의</a></li>
-      </ul>
-    </div>
-  </header>
-
-  <main>
-    <!-- [Hero] 첫 화면 핵심 메시지 영역 -->
-    <section class="hero">
-      <div class="container">
-        <p class="hero-tag">SINCE 1997 · IT TOTAL SOLUTION</p>
-        <h1>구축 이후까지 함께 운영하는<br>IT Total Solution 파트너</h1>
-        <p>KOREA IT는 1997년부터 이어온 현장 경험을 바탕으로 기업 IT 운영, ERP, 데이터 자동화, 보안 관리를 함께 제공합니다.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#contact">서비스 문의하기</a>
-          <a class="btn btn-secondary" href="#about">회사소개 보기</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- [회사소개] 회사 역사/배경 -->
-    <section id="about" class="section">
-      <div class="container">
-        <h2 class="section-title">1997년 부산에서 시작된 현장 경험이<br>2026년 법인 체계로 이어집니다.</h2>
-        <p class="section-lead">KOREA IT의 시작은 1997년 부산 동구 범일동의 작은 컴퓨터 가게였습니다. 상호는 휴먼PC에서 대한정보, 코리아아이티로 바뀌었지만, 고객의 디지털 업무를 지켜온 약속은 이어졌습니다. 2026년, KOREA IT는 주식회사 코리아아이티라는 법인 체계 아래 기업 IT 운영과 ERP/DX 서비스를 더 안정적으로 제공하고자 합니다.</p>
-        <div class="timeline">
-          <div><strong>1997</strong>휴먼PC 창업</div>
-          <div><strong>2005</strong>대한정보</div>
-          <div><strong>2016</strong>코리아아이티</div>
-          <div><strong>2026</strong>주식회사 코리아아이티 법인 출범</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- [서비스] 6개 서비스 카드 -->
-    <section id="services" class="section">
-      <div class="container">
-        <h2 class="section-title">서비스</h2>
-        <div class="grid-3">
-          <article class="card"><h3>기업 IT 운영 / MSP</h3><p>PC, 서버, 네트워크, 계정, 백업, 장애 대응</p></article>
-          <article class="card"><h3>운영 가능한 ERP / MIS</h3><p>맞춤형 ERP, 업무 시스템, UAT, Go-Live, 유지보수</p></article>
-          <article class="card"><h3>데이터 자동화</h3><p>엑셀 양식 표준화, 데이터 매핑, 리포트 자동화</p></article>
-          <article class="card"><h3>보안 / 백업 / 권한 관리</h3><p>계정 권한, 로그, 백업, 비밀정보 관리</p></article>
-          <article class="card"><h3>AI 업무 자동화</h3><p>문서 초안, 점검 자동화, 보고서 자동화, OpenClaw 보조</p></article>
-          <article class="card"><h3>웹 / 호스팅 / 업무 시스템</h3><p>홈페이지, 웹 애플리케이션, 메일·도메인·인증서 관리</p></article>
-        </div>
-      </div>
-    </section>
-
-    <!-- [ERP] 운영 중심 ERP 설명 -->
-    <section id="erp" class="section">
-      <div class="container">
-        <h2 class="section-title">ERP는 납품 이후부터 진짜 운영이 시작됩니다.</h2>
-        <p class="section-lead">ERP는 만든 직후가 끝이 아니라 시작입니다. 양식은 바뀌고, 거래처는 추가되고, 보고서는 늘어나며, 현장에는 매일 새로운 예외가 생깁니다. KOREA IT는 구축 이후의 운영까지 고려해 고객의 업무가 실제로 굴러가는 시스템을 설계합니다.</p>
-        <div class="erp-flow">
-          <div class="erp-step">요구사항 분석</div><div class="erp-step">60일 구축</div><div class="erp-step">30일 UAT</div><div class="erp-step accent-blue">Go-Live</div><div class="erp-step">1년 무상 하자보수</div><div class="erp-step accent-red">유상 유지보수 전환</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- [기술자산] 내부 운영 자산 소개 -->
-    <section id="assets" class="section"><div class="container"><h2 class="section-title">기술자산</h2><div class="grid-3"><article class="card"><h3>Universal Excel Parser</h3><p>다양한 엑셀 양식을 표준화하고 ERP 데이터와 연결하는 KOREA IT의 자체 기술 자산입니다.</p></article><article class="card"><h3>OpenClaw</h3><p>반복 업무 자동화, 문서 초안 생성, 데이터 정합성 점검을 보조하는 AI 운영체계입니다.</p></article><article class="card"><h3>검토 원칙</h3><p>OpenClaw는 의사결정 주체가 아니라 보조 도구입니다. 모든 산출물은 사람이 검토하고 승인합니다.</p></article></div></div></section>
-
-    <!-- [일하는 기준] 운영 원칙 -->
-    <section class="section"><div class="container"><h2 class="section-title">일하는 기준<br>구축 이후까지 남는 회사의 운영 방식</h2><p class="section-lead">KOREA IT는 구축 결과물뿐 아니라, 운영 이력과 변경 과정을 함께 관리합니다. 문서화, 변경관리, 백업, 접근 권한 관리 기준을 통해 고객의 IT 업무가 안정적으로 이어지도록 돕습니다.</p><ul class="check-list"><li>문서화</li><li>변경관리</li><li>백업</li><li>권한관리</li><li>장애 대응</li><li>보안 기준</li><li>인간 검토</li><li>접근 권한 최소화, 로그 기록, 비밀정보 관리</li></ul></div></section>
-
-    <!-- [문의] 연락처 영역 -->
-    <section id="contact" class="section"><div class="container"><h2 class="section-title">문의</h2><div class="contact-list"><div class="contact-item"><strong>회사명</strong>주식회사 코리아아이티</div><div class="contact-item"><strong>이메일</strong><a href="mailto:help@koreait.net">help@koreait.net</a></div><div class="contact-item"><strong>전화</strong><a href="tel:0512314434">051-231-4434</a></div><div class="contact-item"><strong>모바일</strong><a href="tel:01028584582">010-2858-4582</a></div><div class="contact-item"><strong>웹사이트</strong><a href="https://www.koreait.net" target="_blank" rel="noopener">www.koreait.net</a></div><div class="contact-item"><strong>주소</strong>부산광역시 사상구 새벽로 131</div></div></div></section>
-  </main>
-
-  <!-- [푸터] 하단 고정 정보 링크 -->
-  <footer class="site-footer"><div class="container"><div class="footer-links"><a href="notice/index.html">회사 공고</a><a href="ja/index.html">日本語</a></div><p>© 2026 KOREA IT Co., Ltd. All rights reserved.</p></div></footer>
-
-  <!-- 스크롤 상단 이동 버튼 -->
-  <button class="to-top" aria-label="맨 위로 이동">↑</button>
-  <script src="js/main.js"></script>
-</body>
-</html>
+<header class="site-header"><div class="container header-inner"><a class="site-logo" href="index.html"><img src="assets/logo-horizontal.svg" alt="KOREA IT"></a><nav class="main-nav"><ul><li><a href="#about">회사소개</a></li><li><a href="#services">서비스</a></li><li><a href="#erp">운영 가능한 ERP</a></li><li><a href="#assets">기술자산</a></li><li><a class="nav-notice" href="notice/index.html">공고</a></li><li><a href="#contact">문의</a></li></ul></nav><button class="menu-button" aria-expanded="false">메뉴</button></div><div class="mobile-menu"><ul><li><a href="#about">회사소개</a></li><li><a href="#services">서비스</a></li><li><a href="#erp">운영 가능한 ERP</a></li><li><a href="#assets">기술자산</a></li><li><a href="notice/index.html">공고</a></li><li><a href="#contact">문의</a></li><li><a href="ja/index.html">日本語</a></li></ul></div></header>
+<main>
+<section class="hero"><div class="container"><p class="hero-tag">SINCE 1997 · IT TOTAL SOLUTION</p><h1>구축 이후까지 함께 운영하는<br>IT Total Solution 파트너</h1><p>KOREA IT는 1997년부터 이어온 현장 경험을 바탕으로 기업 IT 운영, ERP, 데이터 자동화, 보안 관리를 함께 제공합니다.</p><div class="hero-actions"><a class="btn btn-primary" href="#contact">서비스 문의하기</a><a class="btn btn-secondary" href="#about">회사소개 보기</a></div></div></section>
+<section id="about" class="section"><div class="container"><h2 class="section-title">1997년 부산에서 시작된 현장 경험이<br>2026년 법인 체계로 이어집니다.</h2><p class="section-lead">KOREA IT의 시작은 1997년 부산 동구 범일동의 작은 컴퓨터 가게였습니다. 상호는 휴먼PC에서 대한정보, 코리아아이티로 바뀌었지만, 고객의 디지털 업무를 지켜온 약속은 이어졌습니다. 2026년, KOREA IT는 주식회사 코리아아이티라는 법인 체계 아래 기업 IT 운영과 ERP/DX 서비스를 더 안정적으로 제공하고자 합니다.</p><div class="timeline"><div><strong>1997</strong>휴먼PC 창업</div><div><strong>2005</strong>대한정보</div><div><strong>2016</strong>코리아아이티</div><div><strong>2026</strong>주식회사 코리아아이티 법인 출범</div></div></div></section>
+<section id="services" class="section"><div class="container"><h2 class="section-title">서비스</h2><div class="grid-3"><article class="card"><h3>기업 IT 운영 / MSP</h3><p>PC, 서버, 네트워크, 계정, 백업, 장애 대응</p></article><article class="card"><h3>운영 가능한 ERP / MIS</h3><p>맞춤형 ERP, 업무 시스템, UAT, Go-Live, 유지보수</p></article><article class="card"><h3>데이터 자동화</h3><p>엑셀 양식 표준화, 데이터 매핑, 리포트 자동화</p></article><article class="card"><h3>보안 / 백업 / 권한 관리</h3><p>계정 권한, 로그, 백업, 비밀정보 관리</p></article><article class="card"><h3>AI 업무 자동화</h3><p>문서 초안, 점검 자동화, 보고서 자동화, OpenClaw 보조</p></article><article class="card"><h3>웹 / 호스팅 / 업무 시스템</h3><p>홈페이지, 웹 애플리케이션, 메일·도메인·인증서 관리</p></article></div></div></section>
+<section id="erp" class="section"><div class="container"><h2 class="section-title">ERP는 납품 이후부터 진짜 운영이 시작됩니다.</h2><p class="section-lead">ERP는 만든 직후가 끝이 아니라 시작입니다. 양식은 바뀌고, 거래처는 추가되고, 보고서는 늘어나며, 현장에는 매일 새로운 예외가 생깁니다. KOREA IT는 구축 이후의 운영까지 고려해 고객의 업무가 실제로 굴러가는 시스템을 설계합니다.</p><div class="erp-flow"><div class="erp-step">요구사항 분석</div><div class="erp-step">60일 구축</div><div class="erp-step">30일 UAT</div><div class="erp-step accent-blue">Go-Live</div><div class="erp-step">1년 무상 하자보수</div><div class="erp-step accent-red">유상 유지보수 전환</div></div></div></section>
+<section id="assets" class="section"><div class="container"><h2 class="section-title">기술자산</h2><div class="grid-3"><article class="card"><h3>Universal Excel Parser</h3><p>다양한 엑셀 양식을 표준화하고 ERP 데이터와 연결하는 KOREA IT의 자체 기술 자산입니다.</p></article><article class="card"><h3>OpenClaw</h3><p>반복 업무 자동화, 문서 초안 생성, 데이터 정합성 점검을 보조하는 AI 운영체계입니다.</p></article><article class="card"><h3>검토 원칙</h3><p>OpenClaw는 의사결정 주체가 아니라 보조 도구입니다. 모든 산출물은 사람이 검토하고 승인합니다.</p></article></div></div></section>
+<section class="section"><div class="container"><h2 class="section-title">일하는 기준<br>구축 이후까지 남는 회사의 운영 방식</h2><p class="section-lead">KOREA IT는 구축 결과물뿐 아니라, 운영 이력과 변경 과정을 함께 관리합니다. 문서화, 변경관리, 백업, 접근 권한 관리 기준을 통해 고객의 IT 업무가 안정적으로 이어지도록 돕습니다.</p><ul class="check-list"><li>문서화</li><li>변경관리</li><li>백업</li><li>권한관리</li><li>장애 대응</li><li>보안 기준</li><li>인간 검토</li><li>접근 권한 최소화, 로그 기록, 비밀정보 관리</li></ul></div></section>
+<section id="contact" class="section"><div class="container"><h2 class="section-title">문의</h2><div class="contact-list"><div class="contact-item"><strong>회사명</strong>주식회사 코리아아이티</div><div class="contact-item"><strong>이메일</strong><a href="mailto:help@koreait.net">help@koreait.net</a></div><div class="contact-item"><strong>전화</strong><a href="tel:0512314434">051-231-4434</a></div><div class="contact-item"><strong>모바일</strong><a href="tel:01028584582">010-2858-4582</a></div><div class="contact-item"><strong>웹사이트</strong><a href="https://www.koreait.net" target="_blank" rel="noopener">www.koreait.net</a></div><div class="contact-item"><strong>주소</strong>부산광역시 사상구 새벽로 131</div></div></div></section>
+</main>
+<footer class="site-footer"><div class="container"><div class="footer-links"><a href="notice/index.html">회사 공고</a><a href="ja/index.html">日本語</a></div><p>© 2026 KOREA IT Co., Ltd. All rights reserved.</p></div></footer>
+<button class="to-top" aria-label="맨 위로 이동">↑</button>
+<script src="js/main.js"></script>
+</body></html>
