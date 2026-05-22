@@ -32,8 +32,8 @@ body {
   color: var(--color-dark); /* [기본 글자색] 진한 회색 */
   line-height: 1.7; /* [줄 간격] 본문 가독성 확보 */
   background:
-    linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.96)), /* [옅은 흰 오버레이] 글자 가독성 확보 */
-    url("../assets/images/hero-bg.jpg"), /* [배경 이미지] 파일 교체 시 전체 배경 변경 */
+    linear-gradient(rgba(255, 255, 255, 0.60), rgba(255, 255, 255, 0.60)), /* [옅은 흰 오버레이] 글자 가독성 확보 */
+    url("../assets/image/hero-bg.jpg"), /* [배경 이미지] 파일 교체 시 전체 배경 변경 */
     linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%); /* [대체 배경] 이미지 없을 때도 자연스럽게 표시 */
   background-size: cover, cover, cover; /* [배경 크기] 화면을 가득 채움 */
   background-position: center, center, center; /* [배경 기준점] 중앙 정렬 */
@@ -92,6 +92,28 @@ img { max-width: 100%; } /* [이미지 넘침 방지] 부모 폭보다 커지지
   padding: 0;
   align-items: center;
 }
+/*
+  [상단 일본어 링크]
+  회사소개 / 서비스 / ERP / 기술자산 / 공고 / 문의 메뉴와
+  일본어 페이지 링크 사이를 조금 띄우는 설정입니다.
+
+  margin-left 값을 키우면 日本語가 더 오른쪽으로 멀어집니다.
+  예: 20px → 조금 띄움, 32px → 더 띄움, 40px → 많이 띄움
+*/
+.main-nav .lang-link {
+  margin-left: 28px;
+}
+
+/*
+  [일본어 링크 모양]
+  日本語 링크를 일반 메뉴보다 버튼처럼 보이게 합니다.
+  싫으면 border, padding, border-radius를 삭제해도 됩니다.
+*/
+.main-nav .lang-link a {
+  color: var(--color-mid);
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.96);
+}
 .main-nav a { color: var(--color-mid); font-weight: 500; } /* [기본 메뉴색] */
 .main-nav a:hover { color: var(--color-dark); } /* [호버색] */
 .nav-notice { color: var(--color-blue) !important; } /* [공고 강조] */
@@ -115,30 +137,158 @@ img { max-width: 100%; } /* [이미지 넘침 방지] 부모 폭보다 커지지
 /* =================================================================== */
 /* 05) Hero(첫 화면) 영역 */
 /* 적용 화면: 메인/일본어 첫 화면 배너 */
+/*
+  디자인 의도:
+  - 기존 격자 패턴은 다소 개발자/대시보드 느낌이 강해서 제거합니다.
+  - KOREA IT 브랜드 심볼의 빨강/파랑 사선 막대를 은은하게 반영합니다.
+  - 배경은 화이트 중심으로 유지하고, Red/Blue는 장식 포인트로만 사용합니다.
+  - 글자가 잘 읽히도록 배경 장식은 매우 연하게 처리합니다.
+*/
 /* =================================================================== */
+
 .hero {
-  position: relative; /* [가상요소 기준] ::before 패턴 배치를 위한 기준 */
-  overflow: hidden; /* [넘침 숨김] 장식 패턴이 밖으로 튀지 않게 */
-  padding: 96px 0 84px; /* [세로 여백] 첫 화면 높이감 */
-  background: linear-gradient(rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.92)); /* [추가 강조] body 배경 위에 더 밝은 오버레이 */
+  position: relative; /* ::before, ::after 장식 레이어를 배치하기 위한 기준점입니다. */
+  overflow: hidden; /* 배경 장식이 영역 밖으로 삐져나가도 보이지 않게 합니다. */
+  padding: 112px 0 96px; /* 첫 화면의 위아래 여백입니다. 숫자를 키우면 첫 화면이 더 넓어집니다. */
+
+  /*
+    Hero 기본 배경입니다.
+    body에 깔린 전체 배경 이미지 위에 흰색을 덮어
+    첫 화면 문구가 또렷하게 보이도록 합니다.
+  */
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(255, 255, 255, 0.90) 48%,
+      rgba(246, 247, 249, 0.94) 100%
+    );
 }
+
+/*
+  [Hero 배경 장식 1]
+  브랜드 심볼의 빨강/파랑 사선 막대를 아주 크게 확대해서
+  화면 오른쪽 배경에 은은하게 배치합니다.
+*/
 .hero::before {
-  content: ""; /* [가상 장식 레이어 생성] */
-  position: absolute;
-  inset: 0; /* [전체 덮기] hero 전체 범위 */
-  background-image:
-    linear-gradient(90deg, rgba(220, 40, 50, .04) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(15, 75, 155, .04) 1px, transparent 1px),
-    radial-gradient(circle at 12% 25%, rgba(15, 75, 155, .08), transparent 35%),
-    radial-gradient(circle at 85% 75%, rgba(220, 40, 50, .07), transparent 30%);
-  background-size: 40px 40px, 40px 40px, auto, auto; /* [격자 크기] 너무 튀지 않게 넓게 설정 */
-  pointer-events: none; /* [클릭 방해 금지] 장식 레이어가 버튼 클릭 막지 않게 */
+  content: ""; /* 가상 장식 레이어를 생성합니다. */
+  position: absolute; /* hero 영역 안에서 자유롭게 배치합니다. */
+
+  /*
+    오른쪽 바깥쪽에 걸쳐 배치합니다.
+    숫자를 바꾸면 장식 위치가 바뀝니다.
+  */
+  right: -160px;
+  top: -120px;
+
+  /*
+    장식의 전체 크기입니다.
+    width/height를 키우면 사선 장식이 더 커집니다.
+  */
+  width: 560px;
+  height: 520px;
+
+  /*
+    빨강/파랑 두 개의 사선 막대를 배경으로 만듭니다.
+    브랜드 심볼을 직접 쓰는 것은 아니고, 분위기만 반영합니다.
+  */
+  background:
+    linear-gradient(
+      125deg,
+      transparent 0%,
+      transparent 28%,
+      rgba(220, 40, 50, 0.10) 28%,
+      rgba(220, 40, 50, 0.10) 39%,
+      transparent 39%,
+      transparent 50%,
+      rgba(15, 75, 155, 0.10) 50%,
+      rgba(15, 75, 155, 0.10) 61%,
+      transparent 61%,
+      transparent 100%
+    );
+
+  transform: rotate(-8deg); /* 사선 장식의 각도를 살짝 조정합니다. */
+  pointer-events: none; /* 장식이 버튼 클릭을 방해하지 않게 합니다. */
 }
-.hero .container { position: relative; z-index: 1; } /* [본문 우선] 장식 위에 텍스트 표시 */
-.hero-tag { color: var(--color-blue); font-weight: 700; letter-spacing: .08em; font-size: .92rem; }
-.hero h1 { font-size: clamp(2rem, 4.2vw, 3.2rem); line-height: 1.28; margin: 12px 0 14px; }
-.hero p { color: var(--color-mid); max-width: 700px; }
-.hero-actions { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+
+/*
+  [Hero 배경 장식 2]
+  왼쪽 아래에 아주 약한 파란 빛을 넣어
+  화면이 너무 밋밋하지 않게 합니다.
+*/
+.hero::after {
+  content: ""; /* 두 번째 가상 장식 레이어입니다. */
+  position: absolute;
+  left: -220px;
+  bottom: -260px;
+  width: 520px;
+  height: 520px;
+
+  /*
+    파란색 원형 그라데이션입니다.
+    opacity가 낮아야 글자를 방해하지 않습니다.
+  */
+  background:
+    radial-gradient(
+      circle,
+      rgba(15, 75, 155, 0.10) 0%,
+      rgba(15, 75, 155, 0.06) 32%,
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+/*
+  [Hero 안의 실제 내용]
+  배경 장식보다 글자와 버튼이 위에 보이도록 z-index를 줍니다.
+*/
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/*
+  [SINCE 1997 · IT TOTAL SOLUTION 문구]
+  첫 화면 위쪽의 작은 브랜드 태그입니다.
+*/
+.hero-tag {
+  color: var(--color-blue);
+  font-weight: 700;
+  letter-spacing: .08em;
+  font-size: .92rem;
+}
+
+/*
+  [Hero 큰 제목]
+  홈페이지 첫 화면의 가장 중요한 문장입니다.
+  clamp는 화면 크기에 따라 글자 크기를 자동 조절합니다.
+*/
+.hero h1 {
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
+  line-height: 1.28;
+  margin: 12px 0 14px;
+}
+
+/*
+  [Hero 설명 문장]
+  큰 제목 아래의 설명 문장입니다.
+*/
+.hero p {
+  color: var(--color-mid);
+  max-width: 700px;
+}
+
+/*
+  [Hero 버튼 영역]
+  문의하기, 회사소개 보기 같은 버튼들을 가로로 배치합니다.
+*/
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
 
 /* =================================================================== */
 /* 06) 버튼/카드/타임라인/ERP 흐름 */
@@ -148,24 +298,405 @@ img { max-width: 100%; } /* [이미지 넘침 방지] 부모 폭보다 커지지
 .btn-primary { background: var(--color-blue); color: #fff; }
 .btn-secondary { border-color: var(--color-border); color: var(--color-dark); }
 
-.timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
-.timeline div { background: rgba(246, 247, 249, .9); border: 1px solid var(--color-border); border-radius: 10px; padding: 14px; }
-.timeline strong { color: var(--color-blue); display: block; }
+/* =================================================================== */
+/* 연혁 영역 */
+/* 적용 화면: 회사소개 섹션 안의 1997 / 2005 / 2016 / 2026 연혁 */
+/*
+  디자인 의도:
+  - 기존 네모난 카드 박스 느낌을 줄입니다.
+  - 회사의 오래된 흐름이 자연스럽게 이어져 보이도록 가로 라인 형태로 정리합니다.
+  - 브랜드북 기준에 맞게 Blue는 연도 강조에만 사용합니다.
+*/
+/* =================================================================== */
+
+.timeline {
+  display: grid; /* 연혁 항목들을 가로로 나열합니다. */
+  grid-template-columns: repeat(4, 1fr); /* 4개의 연혁 항목을 같은 너비로 배치합니다. */
+  gap: 0; /* 카드 사이의 간격을 없애고 하나의 흐름처럼 보이게 합니다. */
+  margin-top: 32px; /* 연혁과 위쪽 본문 사이의 간격입니다. */
+  border-top: 1px solid rgba(15, 75, 155, 0.18); /* 연혁 전체를 관통하는 얇은 파란 기준선입니다. */
+}
+
+/* 연혁의 각 항목입니다. 예: 1997 휴먼PC 창업 */
+.timeline div {
+  position: relative; /* 위쪽 점 장식을 배치하기 위한 기준입니다. */
+  padding: 22px 24px 0 0; /* 항목 내부 여백입니다. 위쪽 여백은 기준선과 글자 사이 간격입니다. */
+  background: transparent; /* 박스 배경을 제거합니다. */
+  border: none; /* 네모난 테두리를 제거합니다. */
+  border-radius: 0; /* 둥근 박스 형태를 제거합니다. */
+}
+
+/* 연혁 기준선 위에 찍히는 작은 점입니다. */
+.timeline div::before {
+  content: ""; /* 가상 장식 요소를 만듭니다. */
+  position: absolute; /* 각 연혁 항목 안에서 위치를 직접 지정합니다. */
+  top: -5px; /* 기준선 위에 점이 걸치도록 위로 올립니다. */
+  left: 0; /* 각 항목의 시작 지점에 점을 둡니다. */
+  width: 9px; /* 점의 가로 크기입니다. */
+  height: 9px; /* 점의 세로 크기입니다. */
+  background: var(--color-blue); /* 브랜드 블루 색상 점입니다. */
+  border-radius: 50%; /* 사각형을 원형 점으로 만듭니다. */
+}
+
+/* 연도 표시입니다. 예: 1997, 2005, 2016, 2026 */
+.timeline strong {
+  color: var(--color-blue); /* 연도는 브랜드 블루로 강조합니다. */
+  display: block; /* 연도를 한 줄로 분리합니다. */
+  font-size: 1.05rem; /* 연도 글자 크기입니다. */
+  font-weight: 700; /* 연도를 굵게 표시합니다. */
+  margin-bottom: 6px; /* 연도와 설명 문구 사이 간격입니다. */
+}
+
+/* 연혁 설명 문장입니다. */
+.timeline span,
+.timeline p {
+  color: var(--color-mid); /* 설명 문장은 중간 회색으로 차분하게 표시합니다. */
+}
 
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+/*
+  [서비스 카드]
+  서비스 항목을 보여주는 영역입니다.
+  네모난 박스 느낌을 줄이기 위해 테두리와 배경을 제거했습니다.
+*/
 .card {
-  border: 1px solid var(--color-border); /* [카드 테두리] 섹션 구분 */
-  border-radius: 12px; /* [둥근 모서리] 부드러운 느낌 */
-  padding: 20px; /* [카드 안쪽 여백] 텍스트 숨 쉴 공간 */
-  background: rgba(255, 255, 255, .96); /* [옅은 흰색 배경] 본문 가독성 유지 */
+  padding: 10px 0; /* 카드 안쪽 여백입니다. 숫자를 키우면 항목 사이가 넓어집니다. */
+  background: transparent; /* 흰색 박스 배경을 없애고 페이지 배경과 자연스럽게 연결합니다. */
+  border: none; /* 네모난 테두리를 제거합니다. */
+  border-radius: 0; /* 둥근 박스 모양을 없앱니다. */
 }
 .card h3 { margin: 0 0 8px; font-size: 1.05rem; }
 .card p { margin: 0; color: var(--color-mid); }
 
-.erp-flow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 22px; }
-.erp-step { border: 1px solid var(--color-border); background: rgba(246, 247, 249, .9); padding: 14px 12px; border-radius: 10px; font-size: .92rem; text-align: center; }
-.erp-step.accent-red { border-color: rgba(220, 40, 50, .4); color: var(--color-red); }
-.erp-step.accent-blue { border-color: rgba(15, 75, 155, .35); color: var(--color-blue); }
+/* =================================================================== */
+/*  ERP 운영 흐름 최종 정리                                             */
+/*  적용 화면: "운영 가능한 ERP" 섹션                                   */
+/*                                                                     */
+/*  목적:                                                              */
+/*  1. 기존의 점/선/카드 테두리 때문에 지저분해진 ERP 단계를 정리합니다. */
+/*  2. PC 화면에서는 6개 단계를 가로로 깔끔하게 보여줍니다.              */
+/*  3. 모바일 화면에서는 6개 단계를 세로 목록으로 보여줍니다.            */
+/*  4. 각 단계는 "번호 + 단계명"이 한 덩어리로 보이게 합니다.            */
+/*                                                                     */
+/*  수정 위치 안내:                                                     */
+/*  - 단계 사이 간격을 바꾸고 싶으면 .erp-flow의 gap 값을 수정합니다.    */
+/*  - 번호 원 크기를 바꾸고 싶으면 .erp-step strong의 width/height 수정. */
+/*  - 글자 크기를 바꾸고 싶으면 .erp-step의 font-size를 수정합니다.      */
+/* =================================================================== */
+
+
+/* ------------------------------------------------------------------- */
+/* [PC 화면] ERP 단계 전체를 감싸는 부모 영역                           */
+/* HTML에서 <div class="erp-flow">에 적용됩니다.                         */
+/* ------------------------------------------------------------------- */
+.erp-flow {
+  display: grid !important; /* 6개 단계를 격자 방식으로 배치합니다. */
+
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  /* 
+    6개 단계를 같은 너비로 나눕니다.
+    repeat(6, ...) = 6칸을 만든다는 뜻입니다.
+    minmax(0, 1fr)는 각 칸이 화면 폭에 맞춰 유연하게 줄어들고 늘어나게 합니다.
+  */
+
+  gap: 18px !important;
+  /*
+    각 단계 사이의 가로 간격입니다.
+    숫자를 키우면 단계 사이가 더 벌어지고,
+    줄이면 더 붙습니다.
+  */
+
+  margin-top: 34px !important;
+  /*
+    ERP 설명 문장과 단계 목록 사이의 위쪽 간격입니다.
+    숫자를 키우면 단계 목록이 아래로 더 내려갑니다.
+  */
+
+  padding: 0 !important;
+  /*
+    기존에 들어갔던 안쪽 여백을 제거합니다.
+    ERP 단계들이 불필요하게 밀리는 것을 방지합니다.
+  */
+
+  border: none !important;
+  /*
+    ERP 전체 영역에 생길 수 있는 선/테두리를 제거합니다.
+  */
+
+  background: transparent !important;
+  /*
+    ERP 전체 영역의 배경색을 없앱니다.
+    뒤의 홈페이지 배경이 자연스럽게 보이게 합니다.
+  */
+
+  position: relative !important;
+  /*
+    이전 코드와 충돌하지 않도록 기준 위치만 유지합니다.
+    현재 디자인에서는 큰 장식 배치는 사용하지 않습니다.
+  */
+}
+
+
+/* ------------------------------------------------------------------- */
+/* [PC 화면] ERP 전체 위에 생기던 가로 기준선 제거                       */
+/* 이전 코드의 .erp-flow::before가 선을 만들었기 때문에 강제로 숨깁니다. */
+/* ------------------------------------------------------------------- */
+.erp-flow::before {
+  display: none !important; /* 가로 선을 화면에서 숨깁니다. */
+
+  content: none !important;
+  /*
+    가상 요소 자체의 내용을 없앱니다.
+    선이나 장식이 다시 나타나는 것을 막습니다.
+  */
+}
+
+
+/* ------------------------------------------------------------------- */
+/* [PC 화면] ERP 각 단계                                                */
+/* HTML에서 <div class="erp-step">에 적용됩니다.                         */
+/* 예: 01 요구사항 분석 / 02 60일 구축                                  */
+/* ------------------------------------------------------------------- */
+.erp-step {
+  display: flex !important;
+  /*
+    번호 원과 단계명을 가로로 나란히 배치합니다.
+    이 설정이 있어야 01과 문구가 따로 놀지 않습니다.
+  */
+
+  align-items: flex-start !important;
+  /*
+    번호 원과 단계명 텍스트를 위쪽 기준으로 맞춥니다.
+    텍스트가 두 줄이 되어도 번호가 위쪽에 잘 붙어 있습니다.
+  */
+
+  gap: 10px !important;
+  /*
+    번호 원과 단계명 사이의 간격입니다.
+    숫자를 키우면 번호와 글자가 더 벌어집니다.
+  */
+
+  min-width: 0 !important;
+  /*
+    grid 안에서 글자가 너무 길 때 레이아웃이 깨지는 것을 줄여줍니다.
+  */
+
+  padding: 0 !important;
+  /*
+    기존 ERP 카드에 들어 있던 안쪽 여백을 제거합니다.
+    현재 디자인은 카드가 아니라 텍스트 흐름입니다.
+  */
+
+  margin: 0 !important;
+  /*
+    기존 코드에서 단계마다 들어갔을 수 있는 바깥 여백을 제거합니다.
+  */
+
+  border: none !important;
+  /*
+    각 단계의 네모난 테두리를 제거합니다.
+  */
+
+  background: transparent !important;
+  /*
+    각 단계의 흰색 박스 배경을 제거합니다.
+  */
+
+  border-radius: 0 !important;
+  /*
+    기존 카드형 둥근 모서리를 제거합니다.
+  */
+
+  box-shadow: none !important;
+  /*
+    기존 카드 그림자를 제거합니다.
+  */
+
+  color: var(--color-mid) !important;
+  /*
+    기본 단계 글자색입니다.
+    var(--color-mid)는 style.css 위쪽 :root에 정의된 중간 회색입니다.
+  */
+
+  font-size: .96rem !important;
+  /*
+    단계명 글자 크기입니다.
+    더 크게 하고 싶으면 1rem 또는 1.02rem으로 바꾸면 됩니다.
+  */
+
+  line-height: 1.55 !important;
+  /*
+    단계명이 두 줄이 될 때 줄 사이 간격입니다.
+  */
+
+  text-align: left !important;
+  /*
+    단계명을 왼쪽 정렬합니다.
+  */
+
+  word-break: keep-all !important;
+  /*
+    한국어가 한 글자씩 세로로 떨어지는 것을 막습니다.
+    예: '요구사항 분석'이 '요/구/사/항'처럼 깨지는 문제 방지.
+  */
+}
+
+
+/* ------------------------------------------------------------------- */
+/* [PC 화면] 이전에 찍히던 작은 점 제거                                  */
+/* 현재 디자인에서는 번호 원이 있으므로 별도 점은 사용하지 않습니다.     */
+/* ------------------------------------------------------------------- */
+.erp-step::before {
+  display: none !important; /* 단계 위쪽 점을 숨깁니다. */
+
+  content: none !important;
+  /*
+    가상 점 요소 자체를 비웁니다.
+  */
+}
+
+
+/* ------------------------------------------------------------------- */
+/* [PC 화면] ERP 단계 번호 원                                           */
+/* HTML의 <strong>01</strong> 부분에 적용됩니다.                         */
+/* ------------------------------------------------------------------- */
+.erp-step strong {
+  display: inline-flex !important;
+  /*
+    번호를 원형 버튼처럼 만들기 위해 flex를 사용합니다.
+  */
+
+  flex: 0 0 auto !important;
+  /*
+    번호 원의 크기가 글자 길이에 따라 줄어들지 않도록 고정합니다.
+  */
+
+  align-items: center !important;
+  /*
+    번호 숫자를 원 안에서 세로 가운데 정렬합니다.
+  */
+
+  justify-content: center !important;
+  /*
+    번호 숫자를 원 안에서 가로 가운데 정렬합니다.
+  */
+
+  width: 34px !important;
+  /*
+    번호 원의 가로 크기입니다.
+    크게 하고 싶으면 36px, 작게 하고 싶으면 30px 정도로 조정합니다.
+  */
+
+  height: 34px !important;
+  /*
+    번호 원의 세로 크기입니다.
+    width와 같은 값이어야 원형으로 보입니다.
+  */
+
+  margin: 0 !important;
+  /*
+    기존 strong 태그에 들어갔던 여백을 제거합니다.
+  */
+
+  border-radius: 50% !important;
+  /*
+    사각형을 원으로 만듭니다.
+  */
+
+  background: rgba(15, 75, 155, 0.08) !important;
+  /*
+    번호 원의 배경색입니다.
+    브랜드 블루를 아주 연하게 사용합니다.
+  */
+
+  color: var(--color-blue) !important;
+  /*
+    번호 숫자 색상입니다.
+    브랜드 블루를 사용합니다.
+  */
+
+  font-size: .78rem !important;
+  /*
+    번호 숫자 크기입니다.
+  */
+
+  font-weight: 800 !important;
+  /*
+    번호 숫자를 굵게 표시합니다.
+  */
+
+  letter-spacing: 0 !important;
+  /*
+    번호 숫자의 자간을 기본값으로 둡니다.
+    숫자는 자간을 넓히면 어색해질 수 있습니다.
+  */
+}
+
+
+/* ------------------------------------------------------------------- */
+/* [PC 화면] Go-Live 단계 강조                                          */
+/* HTML에서 class="erp-step accent-red"가 붙은 단계에 적용됩니다.        */
+/* ------------------------------------------------------------------- */
+.erp-step.accent-red {
+  color: var(--color-red) !important;
+  /*
+    Go-Live 단계 문구를 브랜드 레드로 강조합니다.
+  */
+
+  font-weight: 700 !important;
+  /*
+    Go-Live 단계 문구를 굵게 표시합니다.
+  */
+}
+
+
+/* ------------------------------------------------------------------- */
+/* [PC 화면] Go-Live 단계 번호 원 강조                                  */
+/* ------------------------------------------------------------------- */
+.erp-step.accent-red strong {
+  background: rgba(220, 40, 50, 0.10) !important;
+  /*
+    Go-Live 번호 원의 배경을 연한 레드로 표시합니다.
+  */
+
+  color: var(--color-red) !important;
+  /*
+    Go-Live 번호 숫자를 브랜드 레드로 표시합니다.
+  */
+}
+
+
+/* ------------------------------------------------------------------- */
+/* [PC 화면] 1년 무상 하자보수 단계 강조                                */
+/* HTML에서 class="erp-step accent-blue"가 붙은 단계에 적용됩니다.       */
+/* ------------------------------------------------------------------- */
+.erp-step.accent-blue {
+  color: var(--color-blue) !important;
+  /*
+    1년 무상 하자보수 단계 문구를 브랜드 블루로 강조합니다.
+  */
+
+  font-weight: 700 !important;
+  /*
+    해당 단계 문구를 굵게 표시합니다.
+  */
+}
+
+
+/* ------------------------------------------------------------------- */
+/* [PC 화면] 1년 무상 하자보수 단계 번호 원 강조                        */
+/* ------------------------------------------------------------------- */
+.erp-step.accent-blue strong {
+  background: rgba(15, 75, 155, 0.10) !important;
+  /*
+    번호 원의 배경을 연한 블루로 표시합니다.
+  */
+
+  color: var(--color-blue) !important;
+  /*
+    번호 숫자를 브랜드 블루로 표시합니다.
+  */
+}
 
 /* =================================================================== */
 /* 07) 체크리스트/문의/푸터 */
@@ -179,7 +710,18 @@ img { max-width: 100%; } /* [이미지 넘침 방지] 부모 폭보다 커지지
   margin: 20px 0 0;
   padding: 0;
 }
-.check-list li { border: 1px solid var(--color-border); padding: 10px 12px; border-radius: 8px; background: rgba(255, 255, 255, .96); }
+/*
+  [일하는 기준 목록]
+  문서화, 변경관리, 백업 같은 항목입니다.
+  박스 테두리 대신 간단한 텍스트 목록처럼 보이게 합니다.
+*/
+.check-list li {
+  border: none; /* 네모난 테두리 제거 */
+  padding: 6px 0; /* 위아래 여백만 살짝 줌 */
+  border-radius: 0; /* 둥근 박스 제거 */
+  background: transparent; /* 흰 박스 배경 제거 */
+  color: var(--color-dark); /* 글자는 진하게 */
+}
 
 .contact-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 24px; }
 .contact-item strong { color: var(--color-mid); display: block; font-size: .88rem; }
@@ -244,12 +786,116 @@ img { max-width: 100%; } /* [이미지 넘침 방지] 부모 폭보다 커지지
 }
 
 @media (max-width: 640px) {
-  .section { padding: 60px 0; } /* [모바일] 섹션 여백 축소 */
-  .grid-3,
-  .timeline,
-  .check-list,
-  .contact-list,
+  .timeline {
+    border-top: none; /* 모바일에서는 가로 기준선을 제거합니다. */
+    border-left: 1px solid rgba(15, 75, 155, 0.18); /* 세로 기준선으로 바꿉니다. */
+    gap: 0; /* 항목 간격을 정리합니다. */
+  }
+
+  .timeline div {
+    padding: 0 0 22px 22px; /* 세로선 오른쪽으로 글자가 오도록 여백을 줍니다. */
+  }
+
+  .timeline div::before {
+    top: 6px; /* 모바일 세로선 위에 점 위치를 맞춥니다. */
+    left: -5px; /* 세로선 중앙에 점이 오도록 조정합니다. */
+  }
+  /*
+    [모바일 ERP 운영 흐름]
+    작은 화면에서는 6개 단계를 가로로 놓으면 너무 좁아지므로
+    한 줄에 하나씩 세로로 표시합니다.
+  */
   .erp-flow {
-    grid-template-columns: 1fr; /* [모바일 1열] 세로 정렬 */
+    grid-template-columns: 1fr !important;
+    /*
+      모바일에서는 ERP 단계를 1열로 배치합니다.
+      즉, 01부터 06까지 세로로 한 줄씩 내려옵니다.
+    */
+
+    gap: 16px !important;
+    /*
+      모바일에서 각 단계 사이의 세로 간격입니다.
+    */
+
+    margin-top: 28px !important;
+    /*
+      모바일에서 설명문과 ERP 단계 사이 간격입니다.
+    */
+
+    padding: 0 !important;
+    /*
+      모바일에서 불필요한 안쪽 여백을 제거합니다.
+    */
+  }
+
+  .erp-flow::before {
+    display: none !important;
+    /*
+      모바일에서도 가로 기준선은 사용하지 않습니다.
+    */
+
+    content: none !important;
+    /*
+      가상 선 요소의 내용도 제거합니다.
+    */
+  }
+
+  .erp-step {
+    display: flex !important;
+    /*
+      모바일에서도 번호 원과 단계명을 가로로 나란히 둡니다.
+    */
+
+    align-items: flex-start !important;
+    /*
+      번호 원과 텍스트를 위쪽 기준으로 맞춥니다.
+    */
+
+    gap: 12px !important;
+    /*
+      모바일에서 번호 원과 단계명 사이 간격입니다.
+    */
+
+    padding: 0 !important;
+    /*
+      모바일에서도 카드형 여백을 제거합니다.
+    */
+
+    font-size: .96rem !important;
+    /*
+      모바일 단계명 글자 크기입니다.
+    */
+
+    line-height: 1.55 !important;
+    /*
+      모바일 단계명 줄 간격입니다.
+    */
+  }
+
+  .erp-step::before {
+    display: none !important;
+    /*
+      모바일에서도 작은 점은 사용하지 않습니다.
+      번호 원만 사용합니다.
+    */
+
+    content: none !important;
+  }
+
+  .erp-step strong {
+    width: 32px !important;
+    /*
+      모바일에서는 번호 원을 PC보다 살짝 작게 만듭니다.
+    */
+
+    height: 32px !important;
+    /*
+      width와 같은 값으로 둬야 원형이 유지됩니다.
+    */
+
+    font-size: .76rem !important;
+    /*
+      모바일 번호 숫자 크기입니다.
+    */
   }
 }
