@@ -61,18 +61,12 @@ img { max-width: 100%; }
   background-size: 44px 44px;
   pointer-events: none;
 }
-.hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); gap: 40px; align-items: center; }
+.hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: center; }
 .hero-logo { width: 184px; height: auto; display: block; margin-bottom: 26px; }
 .hero-kicker { color: var(--color-blue); font-weight: 800; letter-spacing: .08em; margin: 0 0 14px; }
 .hero h1 { font-size: clamp(2.35rem, 5vw, 4.3rem); line-height: 1.16; margin: 0 0 20px; letter-spacing: -0.04em; }
 .hero-lead { color: var(--color-mid); font-size: 1.12rem; max-width: 700px; margin: 0; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
-.keyword-panel { border: 1px solid var(--color-border); border-radius: 20px; background: rgba(255,255,255,.88); padding: 28px; box-shadow: 0 24px 70px rgba(30,30,35,.07); }
-.keyword-panel strong { display: block; margin-bottom: 16px; }
-.keyword-list { display: flex; flex-wrap: wrap; gap: 10px; }
-.keyword-list span { border: 1px solid var(--color-border); border-radius: 999px; padding: 8px 12px; color: var(--color-mid); background: #fff; font-size: .9rem; font-weight: 700; }
-.keyword-list .point-blue { color: var(--color-blue); border-color: rgba(15,75,155,.25); }
-.keyword-list .point-red { color: var(--color-red); border-color: rgba(220,40,50,.25); }
 
 /* 공통 섹션과 카드: 메인 요약, 상세 페이지, 서비스 목록에 사용합니다. */
 .btn { display: inline-block; border-radius: 9px; padding: 12px 18px; border: 1px solid transparent; font-weight: 800; }
