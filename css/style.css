@@ -1,0 +1,140 @@
+/* KOREA IT 공식 홈페이지 스타일: 색상, 여백, 카드, 모바일 화면을 한 파일에서 관리합니다. */
+:root {
+  --color-red: #DC2832;
+  --color-blue: #0F4B9B;
+  --color-dark: #1E1E23;
+  --color-mid: #5A5A5F;
+  --color-light: #8C8C91;
+  --color-bg: #FFFFFF;
+  --color-bg-soft: #F6F7F9;
+  --color-border: #E5E7EB;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  color: var(--color-dark);
+  background: var(--color-bg);
+  line-height: 1.7;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+.container { width: min(1120px, 92%); margin: 0 auto; }
+
+/* 공통 헤더: 로고와 메뉴가 모든 페이지에서 같은 위치에 보이게 합니다. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid var(--color-border);
+}
+.header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.site-logo img { width: 148px; height: auto; display: block; }
+.main-nav ul { display: flex; align-items: center; gap: 22px; list-style: none; margin: 0; padding: 0; }
+.main-nav a { color: var(--color-mid); font-weight: 700; font-size: 0.95rem; }
+.main-nav a:hover, .main-nav .active { color: var(--color-blue); }
+.nav-notice { color: var(--color-red) !important; }
+.menu-button { display: none; border: 1px solid var(--color-border); background: #fff; border-radius: 8px; padding: 8px 12px; font: inherit; font-weight: 700; }
+.mobile-menu { display: none; border-top: 1px solid var(--color-border); background: #fff; }
+.mobile-menu.active { display: block; }
+.mobile-menu ul { list-style: none; margin: 0; padding: 12px 4%; }
+.mobile-menu a { display: block; padding: 11px 0; color: var(--color-mid); font-weight: 700; }
+
+/* Hero: 첫 화면에서 KOREA IT 정체성을 강하게 보여주는 영역입니다. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0 88px;
+  background:
+    radial-gradient(circle at 84% 14%, rgba(15, 75, 155, 0.09), transparent 30%),
+    radial-gradient(circle at 12% 82%, rgba(220, 40, 50, 0.07), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #f8f9fc 100%);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(90deg, rgba(15, 75, 155, .045) 1px, transparent 1px), linear-gradient(0deg, rgba(30, 30, 35, .035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+}
+.hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); gap: 40px; align-items: center; }
+.hero-logo { width: 184px; height: auto; display: block; margin-bottom: 26px; }
+.hero-kicker { color: var(--color-blue); font-weight: 800; letter-spacing: .08em; margin: 0 0 14px; }
+.hero h1 { font-size: clamp(2.35rem, 5vw, 4.3rem); line-height: 1.16; margin: 0 0 20px; letter-spacing: -0.04em; }
+.hero-lead { color: var(--color-mid); font-size: 1.12rem; max-width: 700px; margin: 0; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
+.keyword-panel { border: 1px solid var(--color-border); border-radius: 20px; background: rgba(255,255,255,.88); padding: 28px; box-shadow: 0 24px 70px rgba(30,30,35,.07); }
+.keyword-panel strong { display: block; margin-bottom: 16px; }
+.keyword-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.keyword-list span { border: 1px solid var(--color-border); border-radius: 999px; padding: 8px 12px; color: var(--color-mid); background: #fff; font-size: .9rem; font-weight: 700; }
+.keyword-list .point-blue { color: var(--color-blue); border-color: rgba(15,75,155,.25); }
+.keyword-list .point-red { color: var(--color-red); border-color: rgba(220,40,50,.25); }
+
+/* 공통 섹션과 카드: 메인 요약, 상세 페이지, 서비스 목록에 사용합니다. */
+.btn { display: inline-block; border-radius: 9px; padding: 12px 18px; border: 1px solid transparent; font-weight: 800; }
+.btn-primary { background: var(--color-blue); color: #fff; }
+.btn-secondary { background: #fff; color: var(--color-dark); border-color: var(--color-border); }
+.section { padding: 78px 0; border-top: 1px solid var(--color-border); }
+.section-soft { background: var(--color-bg-soft); }
+.section-label { color: var(--color-blue); font-size: .88rem; font-weight: 900; letter-spacing: .08em; margin: 0 0 10px; }
+.section-title { font-size: clamp(1.7rem, 3vw, 2.55rem); line-height: 1.32; margin: 0 0 18px; letter-spacing: -0.03em; }
+.section-lead { color: var(--color-mid); margin: 0 0 30px; max-width: 780px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.card { border: 1px solid var(--color-border); border-radius: 16px; background: #fff; padding: 22px; }
+.card-number { color: var(--color-red); font-weight: 900; display: block; margin-bottom: 8px; }
+.card h3 { margin: 0 0 8px; font-size: 1.12rem; }
+.card p { margin: 0; color: var(--color-mid); }
+.service-link { display: block; transition: border-color .2s ease, transform .2s ease; }
+.service-link:hover { border-color: rgba(15,75,155,.35); transform: translateY(-3px); }
+.text-link { display: inline-block; margin-top: 18px; color: var(--color-blue); font-weight: 800; }
+
+/* 공고 미리보기: 메인에는 공고 제목만 짧게 보여줍니다. */
+.notice-preview-list { display: grid; gap: 10px; }
+.notice-preview-item { display: flex; justify-content: space-between; gap: 16px; padding: 14px 16px; border: 1px solid var(--color-border); border-radius: 12px; background: #fff; }
+.notice-preview-item span { color: var(--color-light); font-size: .92rem; }
+.notice-empty { color: var(--color-mid); margin: 0; padding: 16px; border: 1px solid var(--color-border); border-radius: 12px; background: #fff; }
+
+/* 단계/연혁/문의 영역: 상세 페이지에서 정보를 보기 쉽게 정리합니다. */
+.process-steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 26px 0; }
+.process-step { border: 1px solid var(--color-border); border-radius: 14px; background: #fff; padding: 16px 12px; text-align: center; font-weight: 800; }
+.process-step strong { display: block; color: var(--color-blue); font-size: 1.25rem; margin-bottom: 6px; }
+.history-line { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
+.history-item { border-left: 3px solid var(--color-blue); background: #fff; border-radius: 12px; padding: 18px; }
+.history-item strong { display: block; color: var(--color-dark); font-size: 1.25rem; }
+.history-item span { color: var(--color-mid); }
+.contact-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 28px; }
+.contact-item { border-bottom: 1px solid var(--color-border); padding: 12px 0; }
+.contact-item strong { display: block; color: var(--color-mid); font-size: .9rem; }
+.cta-box { border-radius: 22px; background: var(--color-dark); color: #fff; padding: 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.cta-box p { color: rgba(255,255,255,.78); margin: 8px 0 0; }
+.site-footer { border-top: 1px solid var(--color-border); padding: 28px 0; color: var(--color-mid); }
+
+/* 맨 위 이동 버튼 */
+.to-top { position: fixed; right: 18px; bottom: 18px; display: none; width: 42px; height: 42px; border: 0; border-radius: 50%; background: var(--color-dark); color: #fff; cursor: pointer; }
+.to-top.show { display: block; }
+
+@media (max-width: 960px) {
+  .main-nav { display: none; }
+  .menu-button { display: block; }
+  .hero-grid, .grid-2, .cta-box { grid-template-columns: 1fr; display: grid; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .process-steps { grid-template-columns: repeat(3, 1fr); }
+  .history-line { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .hero { padding: 72px 0 64px; }
+  .hero h1 { font-size: 2.1rem; }
+  .section { padding: 58px 0; }
+  .grid-3, .grid-2, .process-steps, .history-line, .contact-list { grid-template-columns: 1fr; }
+  .notice-preview-item { display: block; }
+  .cta-box { padding: 26px; }
+}
+.admin-form { display: grid; gap: 16px; max-width: 760px; }
+.admin-form label { display: grid; gap: 8px; color: var(--color-dark); font-weight: 800; }
+.admin-form input,
+.admin-form textarea { width: 100%; border: 1px solid var(--color-border); border-radius: 10px; padding: 12px; font: inherit; }
