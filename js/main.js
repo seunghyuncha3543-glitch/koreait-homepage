@@ -1,15 +1,8 @@
-/*
-  KOREA IT 1차 홈페이지 JavaScript
-  - 모바일 메뉴 열기/닫기
-  - 맨 위로 이동 버튼
-  복잡한 기능은 넣지 않습니다.
-*/
+/* KOREA IT 홈페이지 JavaScript: 모바일 메뉴, 맨 위 버튼, 메인 공고 제목 목록만 담당합니다. */
 
-// [모바일 메뉴] 버튼과 메뉴 영역을 찾습니다.
 const menuButton = document.querySelector('.menu-button');
 const mobileMenu = document.querySelector('.mobile-menu');
 
-// [모바일 메뉴] 버튼이 있을 때만 클릭 기능을 연결합니다.
 if (menuButton && mobileMenu) {
   menuButton.addEventListener('click', function () {
     const isOpen = mobileMenu.classList.toggle('active');
@@ -17,7 +10,6 @@ if (menuButton && mobileMenu) {
   });
 }
 
-// [모바일 메뉴] 메뉴 항목을 누르면 열린 메뉴를 닫습니다.
 document.querySelectorAll('.mobile-menu a').forEach(function (link) {
   link.addEventListener('click', function () {
     if (mobileMenu) mobileMenu.classList.remove('active');
@@ -25,18 +17,51 @@ document.querySelectorAll('.mobile-menu a').forEach(function (link) {
   });
 });
 
-// [맨 위로 이동] 버튼을 찾습니다.
 const toTopButton = document.querySelector('.to-top');
-
-// [맨 위로 이동] 스크롤을 어느 정도 내리면 버튼을 보여줍니다.
 window.addEventListener('scroll', function () {
   if (!toTopButton) return;
   toTopButton.classList.toggle('show', window.scrollY > 260);
 });
-
-// [맨 위로 이동] 버튼 클릭 시 페이지 맨 위로 이동합니다.
 if (toTopButton) {
   toTopButton.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+}
+
+const noticePreviewList = document.querySelector('#notice-preview-list');
+if (noticePreviewList) {
+  const jsonPath = noticePreviewList.dataset.noticeJson || 'notice/data/notices.json';
+  const viewBase = noticePreviewList.dataset.viewBase || 'notice/view.php?id=';
+
+  fetch(jsonPath, { cache: 'no-store' })
+    .then(function (response) {
+      if (!response.ok) throw new Error('notice json not found');
+      return response.json();
+    })
+    .then(function (notices) {
+      if (!Array.isArray(notices) || notices.length === 0) {
+        noticePreviewList.innerHTML = '<p class="notice-empty">등록된 공고가 없습니다.</p>';
+        return;
+      }
+
+      const recentNotices = notices.slice().reverse().slice(0, 5);
+      noticePreviewList.innerHTML = recentNotices.map(function (notice) {
+        const title = notice.title || '제목 없는 공고';
+        const date = notice.created_at || '';
+        const id = encodeURIComponent(notice.id || '');
+        return '<a class="notice-preview-item" href="' + viewBase + id + '"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(date) + '</span></a>';
+      }).join('');
+    })
+    .catch(function () {
+      noticePreviewList.innerHTML = '<p class="notice-empty">등록된 공고가 없습니다.</p>';
+    });
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
 }
