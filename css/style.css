@@ -23,6 +23,33 @@ a { color: inherit; text-decoration: none; }
 img { max-width: 100%; }
 .container { width: min(1120px, 92%); margin: 0 auto; }
 
+/* 첫 진입 로고 인트로: 메인 페이지에서만 표시되는 짧은 로고 화면입니다. */
+.intro-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  transition: opacity .55s ease, visibility .55s ease;
+  animation: introLoaderFallback .55s ease 1.75s forwards;
+}
+.intro-loader img {
+  width: min(280px, 72vw);
+  height: auto;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: introLogoIn .55s ease forwards;
+}
+.intro-loader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+@keyframes introLogoIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes introLoaderFallback {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
 /* 공통 헤더: 로고와 메뉴가 모든 페이지에서 같은 위치에 보이게 합니다. */
 .site-header {
   position: sticky;
@@ -62,7 +89,10 @@ img { max-width: 100%; }
   pointer-events: none;
 }
 .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: center; }
-.hero-logo { width: 184px; height: auto; display: block; margin-bottom: 26px; }
+.hero-logo,
+.hero-logo img,
+.hero-brand img,
+.hero-visual img { max-width: 260px; width: min(260px, 68vw); height: auto; display: block; margin-bottom: 26px; }
 .hero-kicker { color: var(--color-blue); font-weight: 800; letter-spacing: .08em; margin: 0 0 14px; }
 .hero h1 { font-size: clamp(2.35rem, 5vw, 4.3rem); line-height: 1.16; margin: 0 0 20px; letter-spacing: -0.04em; }
 .hero-lead { color: var(--color-mid); font-size: 1.12rem; max-width: 700px; margin: 0; }
@@ -122,6 +152,7 @@ img { max-width: 100%; }
 }
 @media (max-width: 640px) {
   .hero { padding: 72px 0 64px; }
+  .hero-logo, .hero-logo img, .hero-brand img, .hero-visual img { max-width: 210px; width: min(210px, 72vw); }
   .hero h1 { font-size: 2.1rem; }
   .section { padding: 58px 0; }
   .grid-3, .grid-2, .process-steps, .history-line, .contact-list { grid-template-columns: 1fr; }

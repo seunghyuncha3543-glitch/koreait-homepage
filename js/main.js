@@ -1,5 +1,15 @@
 /* KOREA IT 홈페이지 JavaScript: 모바일 메뉴, 맨 위 버튼, 메인 공고 제목 목록만 담당합니다. */
 
+window.addEventListener('load', function () {
+  const intro = document.getElementById('intro-loader');
+  if (!intro) return;
+
+  window.setTimeout(function () {
+    intro.classList.add('is-hidden');
+  }, 1200);
+});
+
+
 const menuButton = document.querySelector('.menu-button');
 const mobileMenu = document.querySelector('.mobile-menu');
 
