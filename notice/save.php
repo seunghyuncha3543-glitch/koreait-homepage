@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $title = trim($_POST['title'] ?? '');
 $content = trim($_POST['content'] ?? '');
+$password = trim($_POST['password'] ?? '');
 
 if ($title === '') {
     fail('공고 제목을 입력해 주세요.');
@@ -25,6 +26,16 @@ if ($title === '') {
 if ($content === '') {
     fail('공고 내용을 입력해 주세요.');
 }
+
+if ($password === '') {
+    fail('공고 삭제용 비밀번호를 입력해 주세요.');
+}
+
+/*
+  작성 시 입력한 비밀번호를 원문으로 저장하지 않고 hash로 저장합니다.
+  나중에 remove.php에서 password_verify()로 비교합니다.
+*/
+$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
 $dataDir = __DIR__ . '/data';
 $uploadDir = __DIR__ . '/uploads';
@@ -67,7 +78,7 @@ if ($hasFile) {
     $allowed = ['pdf', 'hwp', 'hwpx', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpeg', 'png', 'zip'];
 
     if (!in_array($extension, $allowed, true)) {
-        fail('허용되지 않는 첨부파일 형식입니다. pdf, hwp, hwpx, doc, docx, xls, xlsx, jpg, png, zip 파일만 업로드할 수 있습니다.');
+        fail('허용되지 않는 첨부파일 형식입니다. pdf, hwp, hwpx, doc, docx, xls, xlsx, jpg, jpeg, png, zip 파일만 업로드할 수 있습니다.');
     }
 
     $savedName = date('YmdHis') . '_' . bin2hex(random_bytes(4)) . '.' . $extension;
@@ -91,7 +102,13 @@ $newNotice = [
     'title' => htmlspecialchars($title, ENT_QUOTES, 'UTF-8'),
     'content' => htmlspecialchars($content, ENT_QUOTES, 'UTF-8'),
     'created_at' => date('Y-m-d H:i:s'),
-    'attachment' => $attachment
+    'attachment' => $attachment,
+
+    /*
+      이 공고를 삭제할 때 확인할 비밀번호 hash입니다.
+      원문 비밀번호는 저장하지 않습니다.
+    */
+    'password_hash' => $passwordHash
 ];
 
 array_unshift($notices, $newNotice);
