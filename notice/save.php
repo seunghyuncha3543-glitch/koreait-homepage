@@ -31,5 +31,5 @@ if (!is_array($notices)) { $notices = []; }
 $id = date('YmdHis') . '-' . bin2hex(random_bytes(3));
 $notices[] = ['id'=>$id, 'title'=>$title, 'content'=>$content, 'created_at'=>date('Y-m-d'), 'file_path'=>$filePath, 'file_original'=>$fileOriginal];
 file_put_contents($dataFile, json_encode($notices, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT), LOCK_EX);
-header('Location: view.php?id=' . urlencode($id));
+header('Location: index.php?saved=1');
 exit;
