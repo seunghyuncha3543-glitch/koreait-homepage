@@ -75,7 +75,7 @@ if ($notice) {
 
             <?php if ($attachmentPath !== ''): ?>
               <p style="margin-top:18px">
-                <a class="btn btn-secondary" href="<?= h($attachmentPath) ?>" download>
+                <a class="btn btn-secondary" href="download.php?id=<?= h($notice['id'] ?? '') ?>">
                   첨부파일 다운로드: <?= h($attachmentName) ?>
                 </a>
               </p>
